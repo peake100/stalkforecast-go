@@ -47,7 +47,13 @@ version = __version__
 # ones.
 extensions = [
     "sphinx.ext.todo",
+    "sphinxcontrib.redoc",
 ]
+
+redoc = [{"spec": "./proto/service.swagger.json", "embed": True, "page": "index"}]
+redoc_uri = (
+    "https://cdn.jsdelivr.net/npm/redoc@2.0.0-alpha.17/bundles/redoc.standalone.js"
+)
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]

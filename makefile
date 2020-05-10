@@ -79,6 +79,8 @@ install-globals:
 doc:
 	rm -rf ./zdocs/build
 	mkdir ./zdocs/build
+	# Generate swagger definition
+	protoc -I. --swagger_out=logtostderr=true:./zdocs/source ./proto/service.proto
 	# Rip API docs from godoc. This tools spins up a godoc server and downloads
 	# module docs
 	docmodule-go
@@ -100,4 +102,3 @@ name:
 proto:
 	protoc --go_out=plugins=grpc:. ./proto/service.proto --go_opt=paths=source_relative
 	protoc -I. --grpc-gateway_out=logtostderr=true,paths=source_relative:. ./proto/service.proto
-	protoc -I. --swagger_out=logtostderr=true:. ./proto/service.proto

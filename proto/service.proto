@@ -120,7 +120,7 @@ message Forecast {
 
 // The forecasting service definition.
 service StalkForecaster {
-  // Sends a greeting
+  // Returns a turnip price forecast for supplied price ticker.
   rpc ForecastPrices (Ticker) returns (Forecast) {
     option (google.api.http) = {
       post: "/forecast"
