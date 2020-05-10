@@ -35,7 +35,7 @@ test:
 
 .PHONY: lint
 lint:
-	-revive -config revive.toml ./...
+	-revive -exclude ./proto -config revive.toml ./...
 
 .PHONY: format
 format:
@@ -95,3 +95,9 @@ name:
 	$(eval PATH_NEW := $(shell python3 ./zdevelop/make_scripts/make_name.py $(n)))
 	@echo "library renamed! to switch your current directory, use the following \
 	command:\ncd '$(PATH_NEW)'"
+
+.PHONY: proto
+proto:
+	protoc --go_out=plugins=grpc:. ./proto/service.proto --go_opt=paths=source_relative
+	protoc -I. --grpc-gateway_out=logtostderr=true,paths=source_relative:. ./proto/service.proto
+	protoc -I. --swagger_out=logtostderr=true:. ./proto/service.proto
