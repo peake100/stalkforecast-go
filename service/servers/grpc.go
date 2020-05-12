@@ -38,6 +38,7 @@ func (server *StalkForecastServer) ForecastPrices(
 
 func makeService() (service *grpc.Server, listener net.Listener, err error) {
 	servicePort := ":" + os.Getenv("SERVICE_PORT")
+	log.Printf("serving grpc on port '%v'\n",  servicePort)
 
 	listener, err = net.Listen("tcp", servicePort)
 	if err != nil {
