@@ -17,7 +17,7 @@ func RunRest(
 	grpcServerEndpoint := os.Getenv("SERVICE_HOST") +
 		":" +
 		os.Getenv("SERVICE_PORT")
-	restPort := ":"+os.Getenv("REST_PORT")
+	restPort := ":" + os.Getenv("REST_PORT")
 
 	log.Printf("serving rest gateway on port '%v'\n", restPort)
 
