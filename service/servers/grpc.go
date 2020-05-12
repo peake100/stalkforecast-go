@@ -1,4 +1,4 @@
-package service
+package servers
 
 import (
 	"context"
@@ -36,25 +36,45 @@ func (server *StalkForecastServer) ForecastPrices(
 	return response, nil
 }
 
-func makeService() (*grpc.Server, net.Listener) {
+func makeService() (service *grpc.Server, listener net.Listener, err error) {
 	servicePort := ":" + os.Getenv("SERVICE_PORT")
 
-	listener, err := net.Listen("tcp", servicePort)
+	listener, err = net.Listen("tcp", servicePort)
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		return nil, nil, err
 	}
-	service := grpc.NewServer()
+	service = grpc.NewServer()
 	proto.RegisterStalkForecasterServer(service, new(StalkForecastServer))
-	return service, listener
+	return service, listener, nil
 }
 
-func RunService(errChan chan error) {
-	defer close(errChan)
-	service, listener := makeService()
-	defer service.GracefulStop()
-
-	err := service.Serve(listener)
+func RunGrpc(
+	monitor *ServersMonitor,
+) {
+	// Create the service and listeners
+	service, listener, err := makeService()
 	if err != nil {
-		errChan <- err
+		monitor.grpcErrs <- err
+		monitor.grpcShutdownComplete <- nil
 	}
+
+	// Setup a routine to listen to the shutdown order channel and bring the
+	// service to a stop if it triggers.
+	go func() {
+		<-monitor.shutdownGrpc
+		log.Println("grpc shutdown request received")
+		// Bring the server to a graceful stop
+		service.GracefulStop()
+		// Signal the monitor that the shutdown is complete
+		defer func() {
+			monitor.grpcShutdownComplete <- nil
+		}()
+	}()
+
+	err = service.Serve(listener)
+	if err != nil {
+		monitor.grpcErrs <- err
+	}
+
+	log.Println("grpc process exiting")
 }

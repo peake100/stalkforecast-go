@@ -1,32 +1,22 @@
 package main
 
 import (
-	"github.com/joho/godotenv"
-	"github.com/peake100/stalkforecast-go/rest"
 	"github.com/peake100/stalkforecast-go/service"
-	"log"
-	"sync"
+	"os"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	// start all server processes
+	monitor := service.StartServers()
+
+	// Block until there is a fatal error or a shutdown signal is sent
+	monitor.WaitOnShutdown()
+
+	// If there was an error, exit with a code of 1
+	if monitor.ErrorsEncountered() {
+		os.Exit(1)
 	}
 
-	waitGroup := new(sync.WaitGroup)
-	waitGroup.Add(2)
-
-	serviceErrs := make(chan error)
-	restErrs := make(chan error)
-
-	go service.RunService(serviceErrs)
-	go rest.RunRest(restErrs)
-
-	select {
-	case err := <- serviceErrs:
-		log.Fatal(err)
-	case err := <- restErrs:
-		log.Fatal(err)
-	}
+	// Otherwise exit with a code of 0
+	os.Exit(0)
 }

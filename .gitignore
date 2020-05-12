@@ -24,6 +24,7 @@ zdevelop/scratch/*
 venv/
 env/
 ENV/
+service/.env
 
 # system files
 .DS_Store

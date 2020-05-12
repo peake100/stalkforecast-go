@@ -1,4 +1,4 @@
-package service
+package servers
 
 import (
 	"github.com/peake100/stalkforecast-go/proto"

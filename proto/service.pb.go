@@ -1044,7 +1044,7 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type StalkForecasterClient interface {
-	// Sends a greeting
+	// Returns a turnip price forecast for supplied price ticker.
 	ForecastPrices(ctx context.Context, in *Ticker, opts ...grpc.CallOption) (*Forecast, error)
 }
 
@@ -1067,7 +1067,7 @@ func (c *stalkForecasterClient) ForecastPrices(ctx context.Context, in *Ticker, 
 
 // StalkForecasterServer is the server API for StalkForecaster service.
 type StalkForecasterServer interface {
-	// Sends a greeting
+	// Returns a turnip price forecast for supplied price ticker.
 	ForecastPrices(context.Context, *Ticker) (*Forecast, error)
 }
 
