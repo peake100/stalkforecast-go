@@ -30,6 +30,18 @@ type TestBasicPredictionSuite struct {
 }
 
 func (suite *TestBasicPredictionSuite) SetupSuite() {
+	envVars := map[string]string{
+		"SERVICE_HOST": "localhost",
+		"SERVICE_PORT": "50051",
+		"REST_PORT":    "8080",
+	}
+	for key, value := range envVars {
+		err := os.Setenv(key, value)
+		if err != nil {
+			suite.FailNow("error setting env vars", err)
+		}
+	}
+
 	log.Println("starting servers")
 	suite.monitor = StartServers()
 
