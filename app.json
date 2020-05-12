@@ -1,0 +1,19 @@
+{
+  "buildpacks": [
+    {"url": "heroku/go"},
+  ],
+  "env": {
+    "SERVICE_HOST": {
+      "description": "Host the rest gateway should connect to.",
+      "generator": "localhost"
+    },
+    "SERVICE_PORT": {
+      "description": "Port that the grpc service should be run on.",
+      "generator": "50051"
+    },
+    "REST_PORT": {
+      "description": "Port that the rest gateway should be run on.",
+      "generator": "80"
+    }
+  }
+}
