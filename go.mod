@@ -1,4 +1,4 @@
-module github.com/illuscio-dev/stalkforecaster-go
+module github.com/peake100/stalkforecaster-go
 
 go 1.14
 

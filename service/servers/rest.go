@@ -3,7 +3,7 @@ package servers
 import (
 	"context"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-	"github.com/illuscio-dev/stalkforecaster-go/proto"
+	"github.com/peake100/stalkforecaster-go/proto"
 	"golang.org/x/xerrors"
 	"google.golang.org/grpc"
 	"log"

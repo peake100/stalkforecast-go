@@ -5,8 +5,8 @@ package service
 
 import (
 	"context"
-	"github.com/illuscio-dev/stalkforecaster-go/proto"
-	"github.com/illuscio-dev/stalkforecaster-go/service/servers"
+	"github.com/peake100/stalkforecaster-go/proto"
+	"github.com/peake100/stalkforecaster-go/service/servers"
 	"github.com/stretchr/testify/suite"
 	"google.golang.org/grpc"
 	"log"

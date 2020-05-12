@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/illuscio-dev/stalkforecaster-go/service/servers"
+	"github.com/peake100/stalkforecaster-go/service/servers"
 	"github.com/joho/godotenv"
 )
 

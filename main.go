@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/illuscio-dev/stalkforecaster-go/service"
+	"github.com/peake100/stalkforecaster-go/service"
 	"os"
 )
 
