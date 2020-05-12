@@ -1,4 +1,4 @@
-package service
+package stalkforecaster
 
 //revive:disable:import-shadowing reason: Disabled for assert := assert.New(), which is
 // the preferred method of using multiple asserts in a test.

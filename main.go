@@ -1,4 +1,4 @@
-package main
+package stalkforecaster
 
 import (
 	"github.com/peake100/stalkforecast-go/service"

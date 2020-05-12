@@ -1,15 +1,11 @@
-# Islelib
+# stalkforecaster-go
 
-Islelib is Illuscio's Golang Library template. "Isle" is the naming convention
-for Illuscio code, chosen for its auditory similarity to "I-L" ("AYE_ELL"), as
-opposed to illib which would be phonetically sounded out as "ill".
-
-Islelib comes pre-built with a number of tools for formatting, linting and 
-testing.
+Stalkforecaster is a backend service for forecasting Animal Crossing turnip prices with
+both GRPC and REST API's.
 
 ## Getting Started
-For full documentation:
-[read the docs](https://illuscio-dev.github.io/islelib-go/).
+For API documentation:
+[read the docs](https://peake100.github.io/stalkforecast-go/).
 
 For library development guide, 
 [read the docs](https://illuscio-dev.github.io/islelib-go/).

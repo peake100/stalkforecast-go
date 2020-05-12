@@ -47,13 +47,7 @@ version = __version__
 # ones.
 extensions = [
     "sphinx.ext.todo",
-    "sphinxcontrib.redoc",
 ]
-
-redoc = [{"spec": "./proto/service.swagger.json", "embed": True, "page": "index"}]
-redoc_uri = (
-    "https://cdn.jsdelivr.net/npm/redoc@2.0.0-alpha.17/bundles/redoc.standalone.js"
-)
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -115,7 +109,7 @@ html_static_path = ["_static"]
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "stalkforecastdoc"
+htmlhelp_basename = "stalkforecasterdoc"
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -139,7 +133,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, "stalkforecast.text", "stalkforecast Documentation", "Billy Peake", "manual")
+    (master_doc, "stalkforecaster.text", "stalkforecaster Documentation", "Billy Peake", "manual")
 ]
 
 
@@ -147,7 +141,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "stalkforecast", "stalkforecast Documentation", 1)]
+man_pages = [(master_doc, "stalkforecaster", "stalkforecaster Documentation", 1)]
 
 
 # -- Options for Texinfo output ----------------------------------------------
@@ -158,9 +152,9 @@ man_pages = [(master_doc, "stalkforecast", "stalkforecast Documentation", 1)]
 texinfo_documents = [
     (
         master_doc,
-        "stalkforecast",
-        "stalkforecast Documentation",
-        "stalkforecast",
+        "stalkforecaster",
+        "stalkforecaster Documentation",
+        "stalkforecaster",
         "One line description of project.",
         "Miscellaneous",
     )

@@ -1,4 +1,4 @@
-package servers
+package stalkforecaster
 
 import (
 	"github.com/peake100/stalkforecast-go/proto"

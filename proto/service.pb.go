@@ -4,7 +4,7 @@
 // 	protoc        v3.11.4
 // source: proto/service.proto
 
-package proto
+package stalkforecaster
 
 import (
 	context "context"
@@ -27,7 +27,7 @@ const (
 )
 
 // This is a compile-time assertion that a sufficiently up-to-date version
-// of the legacy proto package is being used.
+// of the legacy proto package stalkforecaster being used.
 const _ = proto.ProtoPackageIsVersion4
 
 // Enum of the price patterns that can occur in animal crossing.
@@ -1037,7 +1037,7 @@ var _ context.Context
 var _ grpc.ClientConnInterface
 
 // This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
+// is compatible with the grpc package stalkforecaster is being compiled against.
 const _ = grpc.SupportPackageIsVersion6
 
 // StalkForecasterClient is the client API for StalkForecaster service.

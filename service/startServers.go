@@ -1,4 +1,4 @@
-package service
+package stalkforecaster
 
 import (
 	"github.com/joho/godotenv"
