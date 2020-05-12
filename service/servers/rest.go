@@ -1,9 +1,9 @@
-package stalkforecaster
+package servers
 
 import (
 	"context"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-	"github.com/peake100/stalkforecast-go/proto"
+	"github.com/illuscio-dev/stalkforecaster-go/proto"
 	"golang.org/x/xerrors"
 	"google.golang.org/grpc"
 	"log"

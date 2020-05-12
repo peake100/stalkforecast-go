@@ -1,8 +1,8 @@
-package stalkforecaster
+package service
 
 import (
+	"github.com/illuscio-dev/stalkforecaster-go/service/servers"
 	"github.com/joho/godotenv"
-	"github.com/peake100/stalkforecast-go/service/servers"
 )
 
 func StartServers() *servers.ServersMonitor {

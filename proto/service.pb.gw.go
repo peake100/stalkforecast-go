@@ -2,11 +2,11 @@
 // source: proto/service.proto
 
 /*
-package stalkforecaster is a reverse proxy.
+Package proto is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package stalkforecaster
+package proto
 
 import (
 	"context"

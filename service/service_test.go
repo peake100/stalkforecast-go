@@ -1,12 +1,12 @@
-package stalkforecaster
+package service
 
 //revive:disable:import-shadowing reason: Disabled for assert := assert.New(), which is
 // the preferred method of using multiple asserts in a test.
 
 import (
 	"context"
-	"github.com/peake100/stalkforecast-go/proto"
-	"github.com/peake100/stalkforecast-go/service/servers"
+	"github.com/illuscio-dev/stalkforecaster-go/proto"
+	"github.com/illuscio-dev/stalkforecaster-go/service/servers"
 	"github.com/stretchr/testify/suite"
 	"google.golang.org/grpc"
 	"log"

@@ -1,7 +1,7 @@
-package stalkforecaster
+package main
 
 import (
-	"github.com/peake100/stalkforecast-go/service"
+	"github.com/illuscio-dev/stalkforecaster-go/service"
 	"os"
 )
 

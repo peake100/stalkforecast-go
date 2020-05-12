@@ -1,4 +1,4 @@
-package stalkforecaster
+package servers
 
 import (
 	"context"

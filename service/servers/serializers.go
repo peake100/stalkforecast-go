@@ -1,7 +1,7 @@
-package stalkforecaster
+package servers
 
 import (
-	"github.com/peake100/stalkforecast-go/proto"
+	"github.com/illuscio-dev/stalkforecaster-go/proto"
 	"github.com/peake100/turnup-go/models"
 )
 
