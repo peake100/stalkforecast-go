@@ -1,3 +1,5 @@
+// +heroku goVersion go1.14
+
 module github.com/peake100/stalkforecaster-go
 
 go 1.14
