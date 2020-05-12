@@ -8,7 +8,6 @@ import (
 	"google.golang.org/grpc"
 	"log"
 	"net"
-	"os"
 )
 
 type StalkForecastServer struct{}
@@ -37,10 +36,11 @@ func (server *StalkForecastServer) ForecastPrices(
 }
 
 func makeService() (service *grpc.Server, listener net.Listener, err error) {
-	servicePort := ":" + os.Getenv("SERVICE_PORT")
-	log.Printf("serving grpc on port '%v'\n", servicePort)
+	grpcAddress := grpcAddress()
 
-	listener, err = net.Listen("tcp", servicePort)
+	log.Printf("serving grpc on '%v'\n", grpcAddress)
+
+	listener, err = net.Listen("tcp", grpcAddress)
 	if err != nil {
 		return nil, nil, err
 	}

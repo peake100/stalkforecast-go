@@ -31,9 +31,10 @@ type TestBasicPredictionSuite struct {
 
 func (suite *TestBasicPredictionSuite) SetupSuite() {
 	envVars := map[string]string{
-		"SERVICE_HOST": "localhost",
-		"SERVICE_PORT": "50051",
-		"REST_PORT":    "8080",
+		"GRPC_HOST": "localhost",
+		"GRPC_PORT": "50051",
+		"REST_HOST": "localhost",
+		"PORT":      "8080",
 	}
 	for key, value := range envVars {
 		err := os.Setenv(key, value)
@@ -46,9 +47,9 @@ func (suite *TestBasicPredictionSuite) SetupSuite() {
 	suite.monitor = StartServers()
 
 	log.Println("servers started")
-	suite.grpcAddress = os.Getenv("SERVICE_HOST") +
+	suite.grpcAddress = os.Getenv("GRPC_HOST") +
 		":" +
-		os.Getenv("SERVICE_PORT")
+		os.Getenv("GRPC_PORT")
 
 	// Set up a connection to the server.
 	log.Println("dialing grpc")

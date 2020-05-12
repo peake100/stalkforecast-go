@@ -8,18 +8,15 @@ import (
 	"google.golang.org/grpc"
 	"log"
 	"net/http"
-	"os"
 )
 
 func RunRest(
 	monitor *ServersMonitor,
 ) {
-	grpcServerEndpoint := os.Getenv("SERVICE_HOST") +
-		":" +
-		os.Getenv("SERVICE_PORT")
-	restPort := ":" + os.Getenv("REST_PORT")
+	grpcServerEndpoint := grpcAddress()
+	restAddress := restAddress()
 
-	log.Printf("serving rest gateway on port '%v'\n", restPort)
+	log.Printf("serving rest gateway on '%v'\n", restAddress)
 
 	// Get a cancelable context for the server, and start a goroutine to listen for
 	// a shutdown command and execute it.
@@ -44,7 +41,7 @@ func RunRest(
 	}
 
 	// Start HTTP server (and proxy calls to gRPC server endpoint)
-	err = http.ListenAndServe(":"+os.Getenv("REST_PORT"), mux)
+	err = http.ListenAndServe(restAddress, mux)
 	if err != nil {
 		err = xerrors.Errorf("error serving REST endpoints: %v", err)
 		monitor.restErrs <- err

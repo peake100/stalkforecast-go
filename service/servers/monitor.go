@@ -90,14 +90,16 @@ func (monitor *ServersMonitor) processEvent() (timeout bool) {
 	case err := <-monitor.grpcErrs:
 		monitor.grpcErrList = append(monitor.grpcErrList, err)
 		log.Println("error from grpc server:", err)
+		monitor.ShutdownServers()
 	case err := <-monitor.restErrs:
 		monitor.restErrList = append(monitor.restErrList, err)
 		log.Println("error from rest server:", err)
+		monitor.ShutdownServers()
 	case <-monitor.grpcShutdownComplete:
-		log.Println("grpc server shutdown timeout")
+		log.Println("grpc server shutdown complete")
 		monitor.grpcDone = true
 	case <-monitor.restShutdownComplete:
-		log.Println("rest server shutdown timeout")
+		log.Println("rest server shutdown complete")
 		monitor.restDone = true
 	}
 
@@ -143,7 +145,7 @@ func NewServiceMonitor() *ServersMonitor {
 		osExitSignal: make(chan os.Signal),
 		// The master shutdown signal is sent and received from the same select block,
 		// so it needs a buffer
-		shutDownMaster: make(chan interface{}, 1),
+		shutDownMaster: make(chan interface{}, 2),
 		shutdownGrpc:   make(chan interface{}, 1),
 		shutdownRest:   make(chan interface{}, 1),
 

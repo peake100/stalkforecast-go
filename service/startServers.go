@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/peake100/stalkforecaster-go/service/servers"
 	"github.com/joho/godotenv"
+	"github.com/peake100/stalkforecaster-go/service/servers"
 )
 
 func StartServers() *servers.ServersMonitor {
