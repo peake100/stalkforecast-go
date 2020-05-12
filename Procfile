@@ -1,1 +1,1 @@
-worker: bin/stalkforecaster-go
+web: bin/stalkforecaster-go
