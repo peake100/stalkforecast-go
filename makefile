@@ -91,3 +91,9 @@ name:
 proto:
 	protoc --go_out=plugins=grpc:. ./proto/service.proto --go_opt=paths=source_relative
 	protoc -I. --grpc-gateway_out=logtostderr=true,paths=source_relative:. ./proto/service.proto
+
+.PHONY: image-dev
+image-dev:
+	DOCKER_BUILDKIT=1 docker build \
+	--no-cache \
+	-t stalkforecaster:dev .

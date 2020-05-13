@@ -33,3 +33,4 @@ jobs:
     # Template parameters
     parameters:
       publishDocs: true
+      publishContainer: true
