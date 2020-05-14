@@ -96,4 +96,4 @@ proto:
 image-dev:
 	DOCKER_BUILDKIT=1 docker build \
 	--no-cache \
-	-t stalkforecaster:dev .
+	-t bpeake89/stalkforecaster:dev .
