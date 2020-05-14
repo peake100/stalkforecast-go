@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "proto/service.proto",
+    "title": "stalk-proto/service.proto",
     "version": "version not set"
   },
   "consumes": [
@@ -13,7 +13,7 @@
   "paths": {
     "/forecast": {
       "post": {
-        "summary": "Returns a turnip price forecast based on your island's turnip price ticker.",
+        "summary": "Returns a turnip price forecast for supplied price ticker.",
         "operationId": "StalkForecaster_ForecastPrices",
         "responses": {
           "200": {

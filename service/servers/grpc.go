@@ -2,7 +2,7 @@ package servers
 
 import (
 	"context"
-	"github.com/peake100/stalkforecaster-go/proto"
+	"github.com/peake100/stalkforecaster-go/gen/stalk-proto"
 	"github.com/peake100/turnup-go"
 	"github.com/peake100/turnup-go/models"
 	"google.golang.org/grpc"

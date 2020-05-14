@@ -1,13 +1,36 @@
 import configparser
 import pathlib
+import subprocess
 
-config_path = pathlib.Path(__file__).parent.parent.parent / "setup.cfg"
+root_dir = pathlib.Path(__file__).parent.parent.parent
+config_path = root_dir / "setup.cfg"
 config = configparser.ConfigParser()
 config.read(str(config_path))
+
+proto_path = (
+    root_dir / "stalk-proto" / "service.proto"
+)
+swagger_path = (
+    root_dir / "zdocs" / "source"
+)
 
 __version__ = config.get("version", "release")
 if not __version__:
     __version__ = config.get("version", "target")
+
+# generate the latest swagger spec
+proc = subprocess.Popen(
+    [
+        "protoc",
+        "-I",
+        root_dir,
+        f"--swagger_out=logtostderr=true:{swagger_path}",
+        str(proto_path),
+    ]
+)
+_, stderr = proc.communicate(timeout=10)
+if stderr:
+    raise RuntimeError("error generating swagger: " + stderr)
 
 # -*- coding: utf-8 -*-
 #
@@ -45,9 +68,12 @@ version = __version__
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [
-    "sphinx.ext.todo",
-]
+extensions = ["sphinxcontrib.redoc"]
+
+redoc = [{"spec": "stalk-proto/service.swagger.json", "embed": True, "page": "index"}]
+redoc_uri = (
+    "https://cdn.jsdelivr.net/npm/redoc@2.0.0-alpha.17/bundles/redoc.standalone.js"
+)
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]

@@ -1,7 +1,7 @@
 package servers
 
 import (
-	"github.com/peake100/stalkforecaster-go/proto"
+	"github.com/peake100/stalkforecaster-go/gen"
 	"github.com/peake100/turnup-go/models"
 )
 
