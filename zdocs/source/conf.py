@@ -24,13 +24,44 @@ proc = subprocess.Popen(
         "protoc",
         "-I",
         root_dir,
-        f"--swagger_out=logtostderr=true:{swagger_path}",
+        f"--swagger_out=logtostderr=true:./zdocs",
         str(proto_path),
+    ],
+    cwd=str(root_dir),
+)
+_, _ = proc.communicate(timeout=30)
+if proc.returncode != 0:
+    raise RuntimeError("error generating swagger")
+
+# gerate the protoc html docs
+proc = subprocess.Popen(
+    [
+        "protoc",
+        f"--doc_out=./zdocs/source/_static",
+        "--doc_opt=html,proto.html",
+        f"./stalk-proto/service.proto",
+    ],
+    cwd=str(root_dir),
+)
+_, _ = proc.communicate(timeout=30)
+if proc.returncode != 0:
+    print(root_dir)
+    raise RuntimeError("error generating protoc doc html")
+
+# generate redoc REST API page
+proc = subprocess.Popen(
+    [
+        "npx",
+        "redoc-cli",
+        "bundle",
+        "-o",
+        str(root_dir / "zdocs/source/_static/redoc.html"),
+        str(swagger_path / "stalk-proto" / "service.swagger.json")
     ]
 )
-_, stderr = proc.communicate(timeout=10)
-if stderr:
-    raise RuntimeError("error generating swagger: " + stderr)
+_, _ = proc.communicate(timeout=30)
+if proc.returncode != 0:
+    raise RuntimeError("error generating redoc html")
 
 # -*- coding: utf-8 -*-
 #
@@ -68,12 +99,7 @@ version = __version__
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinxcontrib.redoc"]
-
-redoc = [{"spec": "stalk-proto/service.swagger.json", "embed": True, "page": "index"}]
-redoc_uri = (
-    "https://cdn.jsdelivr.net/npm/redoc@2.0.0-alpha.17/bundles/redoc.standalone.js"
-)
+extensions = []
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
