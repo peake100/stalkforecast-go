@@ -34,3 +34,4 @@ jobs:
     parameters:
       publishDocs: true
       publishContainer: true
+      installProtoc: true
