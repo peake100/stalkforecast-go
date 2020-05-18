@@ -27,6 +27,8 @@ type TestBasicPredictionSuite struct {
 	clientConn *grpc.ClientConn
 
 	grpcAddress string
+
+	forecast *proto.Forecast
 }
 
 func (suite *TestBasicPredictionSuite) SetupSuite() {
@@ -79,14 +81,28 @@ func (suite *TestBasicPredictionSuite) TestForecaster() {
 	ctx, cancel := requestTimeout()
 	defer cancel()
 
-	prediction, err := suite.client.ForecastPrices(ctx, ticker)
+	forecast, err := suite.client.ForecastPrices(ctx, ticker)
 	suite.NoError(err, "rpc client err")
+	if err != nil {
+		suite.FailNow(err.Error())
+	}
+	suite.forecast = forecast
+}
 
-	suite.Equal(int32(10), prediction.PricesSummary.Min, "min")
+func (suite *TestBasicPredictionSuite) TestPrices() {
+	forecast := suite.forecast
+	suite.Equal(int32(10), forecast.PricesSummary.Min, "min")
 	suite.Equal(
-		int32(85), prediction.PricesFuture.Guaranteed, "guaranteed",
+		int32(85), forecast.PricesFuture.Guaranteed, "guaranteed",
 	)
-	suite.Equal(int32(600), prediction.PricesSummary.Max, "max potential")
+	suite.Equal(int32(600), forecast.PricesSummary.Max, "max potential")
+}
+
+func (suite *TestBasicPredictionSuite) TestSpikeBreakdownLength() {
+	forecast := suite.forecast
+	suite.Len(forecast.Spikes.Any.Breakdown, 12, "Any")
+	suite.Len(forecast.Spikes.Small.Breakdown, 12, "Small")
+	suite.Len(forecast.Spikes.Big.Breakdown, 12, "Big")
 }
 
 func TestBasicPrediction(t *testing.T) {
