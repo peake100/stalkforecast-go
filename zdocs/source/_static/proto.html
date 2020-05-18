@@ -254,21 +254,28 @@
                   <td>prices_summary</td>
                   <td><a href="#proto.PricesSummary">PricesSummary</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>A summary of the high and low prices for the island. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prices_future</td>
+                  <td><a href="#proto.PricesSummary">PricesSummary</a></td>
+                  <td></td>
+                  <td><p>As prices summary, but for the future and current price periods only. </p></td>
                 </tr>
               
                 <tr>
                   <td>spikes</td>
                   <td><a href="#proto.ForecastSpikes">ForecastSpikes</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Information about spike likelihood and potential periods. </p></td>
                 </tr>
               
                 <tr>
                   <td>patterns</td>
                   <td><a href="#proto.PotentialPattern">PotentialPattern</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Detailed breakdown of each potential price pattern. </p></td>
                 </tr>
               
             </tbody>
@@ -330,35 +337,42 @@
                   <td>pattern</td>
                   <td><a href="#proto.PricePatterns">PricePatterns</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The price pattern </p></td>
                 </tr>
               
                 <tr>
                   <td>chance</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>THe chance this price pattern will occur </p></td>
                 </tr>
               
                 <tr>
                   <td>prices_summary</td>
                   <td><a href="#proto.PricesSummary">PricesSummary</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>A summary of the high anf low prices of this pattern </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prices_future</td>
+                  <td><a href="#proto.PricesSummary">PricesSummary</a></td>
+                  <td></td>
+                  <td><p>As prices summary, but for the future and current price periods only. </p></td>
                 </tr>
               
                 <tr>
                   <td>spike</td>
                   <td><a href="#proto.SpikeRange">SpikeRange</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The range a spike might occur in </p></td>
                 </tr>
               
                 <tr>
                   <td>potential_weeks</td>
                   <td><a href="#proto.PotentialWeek">PotentialWeek</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>A list of potential price permutations this pattern might produce. </p></td>
                 </tr>
               
             </tbody>
@@ -397,6 +411,13 @@
                   <td><a href="#proto.PricesSummary">PricesSummary</a></td>
                   <td></td>
                   <td><p>A summary of the prices in this fluctuation. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prices_future</td>
+                  <td><a href="#proto.PricesSummary">PricesSummary</a></td>
+                  <td></td>
+                  <td><p>As prices summary, but for the future and current price periods only. </p></td>
                 </tr>
               
                 <tr>
@@ -465,8 +486,7 @@
                   <td>min</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>The minimum guaranteed price for the parent. This is the highest minimum price
-we can say will happen with 100% certainty. </p></td>
+                  <td><p>The absolute minimum price of the parent object. </p></td>
                 </tr>
               
                 <tr>
@@ -474,6 +494,14 @@ we can say will happen with 100% certainty. </p></td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
                   <td><p>The potential maximum price of the parent object. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>guaranteed</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>The maximum guaranteed price for the parent. This is the minimum highest price
+we can say will happen with 100% certainty. </p></td>
                 </tr>
               
                 <tr>
@@ -488,6 +516,13 @@ we can say will happen with 100% certainty. </p></td>
                   <td><a href="#int32">int32</a></td>
                   <td>repeated</td>
                   <td><p>The price periods during which ``max`` might occur. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>guaranteed_periods</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>repeated</td>
+                  <td><p>The price periods during which ``guaranteed`` might occur. </p></td>
                 </tr>
               
             </tbody>
@@ -620,6 +655,13 @@ given price period. </p></td>
 a price of &#39;0&#39; standing in for &#34;unknown&#34;. If this field contains less than
 12 values, it is assumed the remaining values are 0. The server will reject a
 ticker with less than 12 values </p></td>
+                </tr>
+              
+                <tr>
+                  <td>current_period</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>The current price period on the target island. </p></td>
                 </tr>
               
             </tbody>

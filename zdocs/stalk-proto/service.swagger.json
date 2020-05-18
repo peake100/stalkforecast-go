@@ -50,16 +50,23 @@
       "type": "object",
       "properties": {
         "prices_summary": {
-          "$ref": "#/definitions/protoPricesSummary"
+          "$ref": "#/definitions/protoPricesSummary",
+          "description": "A summary of the high and low prices for the island."
+        },
+        "prices_future": {
+          "$ref": "#/definitions/protoPricesSummary",
+          "description": "As prices summary, but for the future and current price periods only."
         },
         "spikes": {
-          "$ref": "#/definitions/protoForecastSpikes"
+          "$ref": "#/definitions/protoForecastSpikes",
+          "description": "Information about spike likelihood and potential periods."
         },
         "patterns": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/protoPotentialPattern"
-          }
+          },
+          "description": "Detailed breakdown of each potential price pattern."
         }
       },
       "title": "A forecast for prices on your island"
@@ -86,23 +93,32 @@
       "type": "object",
       "properties": {
         "pattern": {
-          "$ref": "#/definitions/protoPricePatterns"
+          "$ref": "#/definitions/protoPricePatterns",
+          "title": "The price pattern"
         },
         "chance": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "title": "THe chance this price pattern will occur"
         },
         "prices_summary": {
-          "$ref": "#/definitions/protoPricesSummary"
+          "$ref": "#/definitions/protoPricesSummary",
+          "title": "A summary of the high anf low prices of this pattern"
+        },
+        "prices_future": {
+          "$ref": "#/definitions/protoPricesSummary",
+          "description": "As prices summary, but for the future and current price periods only."
         },
         "spike": {
-          "$ref": "#/definitions/protoSpikeRange"
+          "$ref": "#/definitions/protoSpikeRange",
+          "title": "The range a spike might occur in"
         },
         "potential_weeks": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/protoPotentialWeek"
-          }
+          },
+          "description": "A list of potential price permutations this pattern might produce."
         }
       },
       "description": "Describes the potential course a price pattern may take given the user's price\nticker."
@@ -125,6 +141,10 @@
         "prices_summary": {
           "$ref": "#/definitions/protoPricesSummary",
           "description": "A summary of the prices in this fluctuation."
+        },
+        "prices_future": {
+          "$ref": "#/definitions/protoPricesSummary",
+          "description": "As prices summary, but for the future and current price periods only."
         },
         "spike": {
           "$ref": "#/definitions/protoSpikeRange",
@@ -171,12 +191,17 @@
         "min": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum guaranteed price for the parent. This is the highest minimum price\nwe can say will happen with 100% certainty."
+          "description": "The absolute minimum price of the parent object."
         },
         "max": {
           "type": "integer",
           "format": "int32",
           "description": "The potential maximum price of the parent object."
+        },
+        "guaranteed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum guaranteed price for the parent. This is the minimum highest price\nwe can say will happen with 100% certainty."
         },
         "min_periods": {
           "type": "array",
@@ -193,6 +218,14 @@
             "format": "int32"
           },
           "description": "The price periods during which ``max`` might occur."
+        },
+        "guaranteed_periods": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The price periods during which ``guaranteed`` might occur."
         }
       },
       "description": "Price info for a series of prices."
@@ -271,6 +304,11 @@
             "format": "int32"
           },
           "title": "The known nook prices for bells. This is expected to be a 12-value array with\na price of '0' standing in for \"unknown\". If this field contains less than\n12 values, it is assumed the remaining values are 0. The server will reject a\nticker with less than 12 values"
+        },
+        "current_period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current price period on the target island."
         }
       },
       "title": "Island price data sent when requesting a prediction"

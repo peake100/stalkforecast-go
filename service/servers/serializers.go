@@ -15,10 +15,12 @@ func serializePricePeriods(pricePeriods []models.PricePeriod) []int32 {
 
 func serializePriceSeries(series *models.PriceSeries) *proto.PricesSummary {
 	return &proto.PricesSummary{
-		Min:        int32(series.MinPrice()),
-		Max:        int32(series.MaxPrice()),
-		MinPeriods: serializePricePeriods(series.MinPeriods()),
-		MaxPeriods: serializePricePeriods(series.MaxPeriods()),
+		Min:               int32(series.MinPrice()),
+		Guaranteed:        int32(series.GuaranteedPrice()),
+		Max:               int32(series.MaxPrice()),
+		MinPeriods:        serializePricePeriods(series.MinPeriods()),
+		MaxPeriods:        serializePricePeriods(series.MaxPeriods()),
+		GuaranteedPeriods: serializePricePeriods(series.GuaranteedPeriods()),
 	}
 }
 
@@ -64,6 +66,7 @@ func serializeWeek(
 		Chance:        week.Chance(),
 		Prices:        prices,
 		PricesSummary: serializePriceSeries(&week.PriceSeries),
+		PricesFuture:  serializePriceSeries(&week.Future),
 		// We can use any spike here because in this instance is will be identical to
 		// to whatever spike pattern type we are in
 		Spike: serializeSpikeRange(week.Spikes.Any()),
@@ -82,6 +85,7 @@ func serializePattern(in *models.PotentialPattern) *proto.PotentialPattern {
 		Pattern:       proto.PricePatterns(in.Pattern),
 		Chance:        in.Chance(),
 		PricesSummary: serializePriceSeries(&in.PriceSeries),
+		PricesFuture:  serializePriceSeries(&in.Future),
 		// We can use any spike here because in this instance is will be identical to
 		// to whatever spike pattern type we are in
 		Spike:          serializeSpikeRange(in.Spikes.Any()),
@@ -98,6 +102,7 @@ func serializePrediction(prediction *models.Prediction) *proto.Forecast {
 
 	forecast := &proto.Forecast{
 		PricesSummary: serializePriceSeries(&prediction.PriceSeries),
+		PricesFuture:  serializePriceSeries(&prediction.Future),
 		Patterns:      pricePatterns,
 		Spikes: &proto.ForecastSpikes{
 			Small: serializeForecastSpikes(prediction.Spikes.Small()),
