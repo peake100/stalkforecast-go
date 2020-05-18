@@ -57,6 +57,8 @@ github.com/mwitkow/go-proto-validators v0.0.0-20180403085117-0950a7990007 h1:28i
 github.com/mwitkow/go-proto-validators v0.0.0-20180403085117-0950a7990007/go.mod h1:m2XC9Qq0AlmmVksL6FktJCdTYyLk7V3fKyp0sl1yWQo=
 github.com/peake100/turnup-go v0.0.2 h1:FS3Nze1SC8vLIbRGs1h+TvrZQvGASjp4TyzFSFWjhNQ=
 github.com/peake100/turnup-go v0.0.2/go.mod h1:DZyu071PH4HPYqj61gY9sH+lkgbElnS9cUmGFLoIbRc=
+github.com/peake100/turnup-go v0.1.1 h1:XzrgFLagl3/mZltFRsjrJe4egP+vrQnMbnoglUWy0wU=
+github.com/peake100/turnup-go v0.1.1/go.mod h1:DZyu071PH4HPYqj61gY9sH+lkgbElnS9cUmGFLoIbRc=
 github.com/pmezard/go-difflib v0.0.0-20151028094244-d8ed2627bdf0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=

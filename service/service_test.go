@@ -82,7 +82,10 @@ func (suite *TestBasicPredictionSuite) TestForecaster() {
 	prediction, err := suite.client.ForecastPrices(ctx, ticker)
 	suite.NoError(err, "rpc client err")
 
-	suite.Equal(int32(85), prediction.PricesSummary.Min, "min guaranteed")
+	suite.Equal(int32(10), prediction.PricesSummary.Min, "min")
+	suite.Equal(
+		int32(85), prediction.PricesFuture.Guaranteed, "guaranteed",
+	)
 	suite.Equal(int32(600), prediction.PricesSummary.Max, "max potential")
 }
 

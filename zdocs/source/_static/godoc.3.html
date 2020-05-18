@@ -146,6 +146,9 @@ It translates gRPC into RESTful JSON APIs.
 					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Forecast.GetPatterns">func (x *Forecast) GetPatterns() []*PotentialPattern</a></dd>
 				
 					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Forecast.GetPricesFuture">func (x *Forecast) GetPricesFuture() *PricesSummary</a></dd>
+				
+					
 					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Forecast.GetPricesSummary">func (x *Forecast) GetPricesSummary() *PricesSummary</a></dd>
 				
 					
@@ -210,6 +213,9 @@ It translates gRPC into RESTful JSON APIs.
 					<dd>&nbsp; &nbsp; <a href="godoc.3.html#PotentialPattern.GetPotentialWeeks">func (x *PotentialPattern) GetPotentialWeeks() []*PotentialWeek</a></dd>
 				
 					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#PotentialPattern.GetPricesFuture">func (x *PotentialPattern) GetPricesFuture() *PricesSummary</a></dd>
+				
+					
 					<dd>&nbsp; &nbsp; <a href="godoc.3.html#PotentialPattern.GetPricesSummary">func (x *PotentialPattern) GetPricesSummary() *PricesSummary</a></dd>
 				
 					
@@ -240,6 +246,9 @@ It translates gRPC into RESTful JSON APIs.
 				
 					
 					<dd>&nbsp; &nbsp; <a href="godoc.3.html#PotentialWeek.GetPrices">func (x *PotentialWeek) GetPrices() []*PricePeriod</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#PotentialWeek.GetPricesFuture">func (x *PotentialWeek) GetPricesFuture() *PricesSummary</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="godoc.3.html#PotentialWeek.GetPricesSummary">func (x *PotentialWeek) GetPricesSummary() *PricesSummary</a></dd>
@@ -318,6 +327,12 @@ It translates gRPC into RESTful JSON APIs.
 				
 					
 					<dd>&nbsp; &nbsp; <a href="godoc.3.html#PricesSummary.Descriptor">func (*PricesSummary) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#PricesSummary.GetGuaranteed">func (x *PricesSummary) GetGuaranteed() int32</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#PricesSummary.GetGuaranteedPeriods">func (x *PricesSummary) GetGuaranteedPeriods() []int32</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="godoc.3.html#PricesSummary.GetMax">func (x *PricesSummary) GetMax() int32</a></dd>
@@ -427,6 +442,9 @@ It translates gRPC into RESTful JSON APIs.
 				
 					
 					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Ticker.Descriptor">func (*Ticker) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Ticker.GetCurrentPeriod">func (x *Ticker) GetCurrentPeriod() int32</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="godoc.3.html#Ticker.GetPreviousPattern">func (x *Ticker) GetPreviousPattern() PricePatterns</a></dd>
@@ -585,7 +603,7 @@ StreamingRPC :currently unsupported pending <a href="https://github.com/grpc/grp
 		
 			
 			
-			<h2 id="RegisterStalkForecasterServer">func <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=37825:37902#L1073">RegisterStalkForecasterServer</a>
+			<h2 id="RegisterStalkForecasterServer">func <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=42009:42086#L1157">RegisterStalkForecasterServer</a>
 				<a class="permalink" href="godoc.3.html#RegisterStalkForecasterServer">&#xb6;</a>
 				
 				
@@ -599,7 +617,7 @@ StreamingRPC :currently unsupported pending <a href="https://github.com/grpc/grp
 		
 			
 			
-			<h2 id="Forecast">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=18452:18937#L671">Forecast</a>
+			<h2 id="Forecast">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=20138:20980#L721">Forecast</a>
 				<a class="permalink" href="godoc.3.html#Forecast">&#xb6;</a>
 				
 				
@@ -609,9 +627,15 @@ A forecast for prices on your island
 </p>
 
 			<pre>type Forecast struct {
-<span id="Forecast.PricesSummary"></span>    PricesSummary *<a href="godoc.3.html#PricesSummary">PricesSummary</a>      `protobuf:&#34;bytes,1,opt,name=prices_summary,json=pricesSummary,proto3&#34; json:&#34;prices_summary,omitempty&#34;`
-<span id="Forecast.Spikes"></span>    Spikes        *<a href="godoc.3.html#ForecastSpikes">ForecastSpikes</a>     `protobuf:&#34;bytes,2,opt,name=spikes,proto3&#34; json:&#34;spikes,omitempty&#34;`
-<span id="Forecast.Patterns"></span>    Patterns      []*<a href="godoc.3.html#PotentialPattern">PotentialPattern</a> `protobuf:&#34;bytes,3,rep,name=patterns,proto3&#34; json:&#34;patterns,omitempty&#34;`
+
+    <span class="comment">// A summary of the high and low prices for the island.</span>
+<span id="Forecast.PricesSummary"></span>    PricesSummary *<a href="godoc.3.html#PricesSummary">PricesSummary</a> `protobuf:&#34;bytes,1,opt,name=prices_summary,json=pricesSummary,proto3&#34; json:&#34;prices_summary,omitempty&#34;`
+    <span class="comment">// As prices summary, but for the future and current price periods only.</span>
+<span id="Forecast.PricesFuture"></span>    PricesFuture *<a href="godoc.3.html#PricesSummary">PricesSummary</a> `protobuf:&#34;bytes,4,opt,name=prices_future,json=pricesFuture,proto3&#34; json:&#34;prices_future,omitempty&#34;`
+    <span class="comment">// Information about spike likelihood and potential periods.</span>
+<span id="Forecast.Spikes"></span>    Spikes *<a href="godoc.3.html#ForecastSpikes">ForecastSpikes</a> `protobuf:&#34;bytes,2,opt,name=spikes,proto3&#34; json:&#34;spikes,omitempty&#34;`
+    <span class="comment">// Detailed breakdown of each potential price pattern.</span>
+<span id="Forecast.Patterns"></span>    Patterns []*<a href="godoc.3.html#PotentialPattern">PotentialPattern</a> `protobuf:&#34;bytes,3,rep,name=patterns,proto3&#34; json:&#34;patterns,omitempty&#34;`
     <span class="comment">// contains filtered or unexported fields</span>
 }
 </pre>
@@ -628,7 +652,7 @@ A forecast for prices on your island
 
 			
 				
-				<h3 id="Forecast.Descriptor">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=19647:19692#L709">Descriptor</a>
+				<h3 id="Forecast.Descriptor">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=21690:21735#L764">Descriptor</a>
 					<a class="permalink" href="godoc.3.html#Forecast.Descriptor">&#xb6;</a>
 					
 					
@@ -643,7 +667,7 @@ Deprecated: Use Forecast.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="Forecast.GetPatterns">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=19974:20026#L727">GetPatterns</a>
+				<h3 id="Forecast.GetPatterns">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=22128:22180#L789">GetPatterns</a>
 					<a class="permalink" href="godoc.3.html#Forecast.GetPatterns">&#xb6;</a>
 					
 					
@@ -655,7 +679,19 @@ Deprecated: Use Forecast.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="Forecast.GetPricesSummary">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=19761:19813#L713">GetPricesSummary</a>
+				<h3 id="Forecast.GetPricesFuture">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=21917:21968#L775">GetPricesFuture</a>
+					<a class="permalink" href="godoc.3.html#Forecast.GetPricesFuture">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#Forecast">Forecast</a>) GetPricesFuture() *<a href="godoc.3.html#PricesSummary">PricesSummary</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Forecast.GetPricesSummary">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=21804:21856#L768">GetPricesSummary</a>
 					<a class="permalink" href="godoc.3.html#Forecast.GetPricesSummary">&#xb6;</a>
 					
 					
@@ -667,7 +703,7 @@ Deprecated: Use Forecast.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="Forecast.GetSpikes">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=19874:19920#L720">GetSpikes</a>
+				<h3 id="Forecast.GetSpikes">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=22028:22074#L782">GetSpikes</a>
 					<a class="permalink" href="godoc.3.html#Forecast.GetSpikes">&#xb6;</a>
 					
 					
@@ -679,7 +715,7 @@ Deprecated: Use Forecast.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="Forecast.ProtoMessage">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=19235:19266#L694">ProtoMessage</a>
+				<h3 id="Forecast.ProtoMessage">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=21278:21309#L749">ProtoMessage</a>
 					<a class="permalink" href="godoc.3.html#Forecast.ProtoMessage">&#xb6;</a>
 					
 					
@@ -691,7 +727,7 @@ Deprecated: Use Forecast.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="Forecast.ProtoReflect">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=19271:19325#L696">ProtoReflect</a>
+				<h3 id="Forecast.ProtoReflect">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=21314:21368#L751">ProtoReflect</a>
 					<a class="permalink" href="godoc.3.html#Forecast.ProtoReflect">&#xb6;</a>
 					
 					
@@ -703,7 +739,7 @@ Deprecated: Use Forecast.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="Forecast.Reset">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=18939:18965#L681">Reset</a>
+				<h3 id="Forecast.Reset">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=20982:21008#L736">Reset</a>
 					<a class="permalink" href="godoc.3.html#Forecast.Reset">&#xb6;</a>
 					
 					
@@ -715,7 +751,7 @@ Deprecated: Use Forecast.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="Forecast.String">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=19156:19190#L690">String</a>
+				<h3 id="Forecast.String">func (*Forecast) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=21199:21233#L745">String</a>
 					<a class="permalink" href="godoc.3.html#Forecast.String">&#xb6;</a>
 					
 					
@@ -729,7 +765,7 @@ Deprecated: Use Forecast.ProtoReflect.Descriptor instead.
 		
 			
 			
-			<h2 id="ForecastSpikes">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=16700:17248#L604">ForecastSpikes</a>
+			<h2 id="ForecastSpikes">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=18386:18934#L654">ForecastSpikes</a>
 				<a class="permalink" href="godoc.3.html#ForecastSpikes">&#xb6;</a>
 				
 				
@@ -763,7 +799,7 @@ breakdown of likelihood for each price period, by spike type.
 
 			
 				
-				<h3 id="ForecastSpikes.Descriptor">func (*ForecastSpikes) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=17994:18045#L645">Descriptor</a>
+				<h3 id="ForecastSpikes.Descriptor">func (*ForecastSpikes) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=19680:19731#L695">Descriptor</a>
 					<a class="permalink" href="godoc.3.html#ForecastSpikes.Descriptor">&#xb6;</a>
 					
 					
@@ -778,7 +814,7 @@ Deprecated: Use ForecastSpikes.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="ForecastSpikes.GetAny">func (*ForecastSpikes) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=18314:18361#L663">GetAny</a>
+				<h3 id="ForecastSpikes.GetAny">func (*ForecastSpikes) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=20000:20047#L713">GetAny</a>
 					<a class="permalink" href="godoc.3.html#ForecastSpikes.GetAny">&#xb6;</a>
 					
 					
@@ -790,7 +826,7 @@ Deprecated: Use ForecastSpikes.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="ForecastSpikes.GetBig">func (*ForecastSpikes) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=18216:18263#L656">GetBig</a>
+				<h3 id="ForecastSpikes.GetBig">func (*ForecastSpikes) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=19902:19949#L706">GetBig</a>
 					<a class="permalink" href="godoc.3.html#ForecastSpikes.GetBig">&#xb6;</a>
 					
 					
@@ -802,7 +838,7 @@ Deprecated: Use ForecastSpikes.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="ForecastSpikes.GetSmall">func (*ForecastSpikes) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=18114:18163#L649">GetSmall</a>
+				<h3 id="ForecastSpikes.GetSmall">func (*ForecastSpikes) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=19800:19849#L699">GetSmall</a>
 					<a class="permalink" href="godoc.3.html#ForecastSpikes.GetSmall">&#xb6;</a>
 					
 					
@@ -814,7 +850,7 @@ Deprecated: Use ForecastSpikes.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="ForecastSpikes.ProtoMessage">func (*ForecastSpikes) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=17564:17601#L630">ProtoMessage</a>
+				<h3 id="ForecastSpikes.ProtoMessage">func (*ForecastSpikes) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=19250:19287#L680">ProtoMessage</a>
 					<a class="permalink" href="godoc.3.html#ForecastSpikes.ProtoMessage">&#xb6;</a>
 					
 					
@@ -826,7 +862,7 @@ Deprecated: Use ForecastSpikes.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="ForecastSpikes.ProtoReflect">func (*ForecastSpikes) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=17606:17666#L632">ProtoReflect</a>
+				<h3 id="ForecastSpikes.ProtoReflect">func (*ForecastSpikes) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=19292:19352#L682">ProtoReflect</a>
 					<a class="permalink" href="godoc.3.html#ForecastSpikes.ProtoReflect">&#xb6;</a>
 					
 					
@@ -838,7 +874,7 @@ Deprecated: Use ForecastSpikes.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="ForecastSpikes.Reset">func (*ForecastSpikes) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=17250:17282#L617">Reset</a>
+				<h3 id="ForecastSpikes.Reset">func (*ForecastSpikes) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=18936:18968#L667">Reset</a>
 					<a class="permalink" href="godoc.3.html#ForecastSpikes.Reset">&#xb6;</a>
 					
 					
@@ -850,7 +886,7 @@ Deprecated: Use ForecastSpikes.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="ForecastSpikes.String">func (*ForecastSpikes) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=17479:17519#L626">String</a>
+				<h3 id="ForecastSpikes.String">func (*ForecastSpikes) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=19165:19205#L676">String</a>
 					<a class="permalink" href="godoc.3.html#ForecastSpikes.String">&#xb6;</a>
 					
 					
@@ -864,7 +900,7 @@ Deprecated: Use ForecastSpikes.ProtoReflect.Descriptor instead.
 		
 			
 			
-			<h2 id="PotentialPattern">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=12115:12866#L437">PotentialPattern</a>
+			<h2 id="PotentialPattern">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=13291:14433#L473">PotentialPattern</a>
 				<a class="permalink" href="godoc.3.html#PotentialPattern">&#xb6;</a>
 				
 				
@@ -875,10 +911,18 @@ ticker.
 </p>
 
 			<pre>type PotentialPattern struct {
-<span id="PotentialPattern.Pattern"></span>    Pattern        <a href="godoc.3.html#PricePatterns">PricePatterns</a>    `protobuf:&#34;varint,1,opt,name=pattern,proto3,enum=proto.PricePatterns&#34; json:&#34;pattern,omitempty&#34;`
-<span id="PotentialPattern.Chance"></span>    Chance         <a href="http://localhost:6161/pkg/builtin/#float64">float64</a>          `protobuf:&#34;fixed64,2,opt,name=chance,proto3&#34; json:&#34;chance,omitempty&#34;`
-<span id="PotentialPattern.PricesSummary"></span>    PricesSummary  *<a href="godoc.3.html#PricesSummary">PricesSummary</a>   `protobuf:&#34;bytes,3,opt,name=prices_summary,json=pricesSummary,proto3&#34; json:&#34;prices_summary,omitempty&#34;`
-<span id="PotentialPattern.Spike"></span>    Spike          *<a href="godoc.3.html#SpikeRange">SpikeRange</a>      `protobuf:&#34;bytes,4,opt,name=spike,proto3&#34; json:&#34;spike,omitempty&#34;`
+
+    <span class="comment">// The price pattern</span>
+<span id="PotentialPattern.Pattern"></span>    Pattern <a href="godoc.3.html#PricePatterns">PricePatterns</a> `protobuf:&#34;varint,1,opt,name=pattern,proto3,enum=proto.PricePatterns&#34; json:&#34;pattern,omitempty&#34;`
+    <span class="comment">// THe chance this price pattern will occur</span>
+<span id="PotentialPattern.Chance"></span>    Chance <a href="http://localhost:6161/pkg/builtin/#float64">float64</a> `protobuf:&#34;fixed64,2,opt,name=chance,proto3&#34; json:&#34;chance,omitempty&#34;`
+    <span class="comment">// A summary of the high anf low prices of this pattern</span>
+<span id="PotentialPattern.PricesSummary"></span>    PricesSummary *<a href="godoc.3.html#PricesSummary">PricesSummary</a> `protobuf:&#34;bytes,3,opt,name=prices_summary,json=pricesSummary,proto3&#34; json:&#34;prices_summary,omitempty&#34;`
+    <span class="comment">// As prices summary, but for the future and current price periods only.</span>
+<span id="PotentialPattern.PricesFuture"></span>    PricesFuture *<a href="godoc.3.html#PricesSummary">PricesSummary</a> `protobuf:&#34;bytes,6,opt,name=prices_future,json=pricesFuture,proto3&#34; json:&#34;prices_future,omitempty&#34;`
+    <span class="comment">// The range a spike might occur in</span>
+<span id="PotentialPattern.Spike"></span>    Spike *<a href="godoc.3.html#SpikeRange">SpikeRange</a> `protobuf:&#34;bytes,4,opt,name=spike,proto3&#34; json:&#34;spike,omitempty&#34;`
+    <span class="comment">// A list of potential price permutations this pattern might produce.</span>
 <span id="PotentialPattern.PotentialWeeks"></span>    PotentialWeeks []*<a href="godoc.3.html#PotentialWeek">PotentialWeek</a> `protobuf:&#34;bytes,5,rep,name=potential_weeks,json=potentialWeeks,proto3&#34; json:&#34;potential_weeks,omitempty&#34;`
     <span class="comment">// contains filtered or unexported fields</span>
 }
@@ -896,7 +940,7 @@ ticker.
 
 			
 				
-				<h3 id="PotentialPattern.Descriptor">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=13624:13677#L477">Descriptor</a>
+				<h3 id="PotentialPattern.Descriptor">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=15191:15244#L520">Descriptor</a>
 					<a class="permalink" href="godoc.3.html#PotentialPattern.Descriptor">&#xb6;</a>
 					
 					
@@ -911,7 +955,7 @@ Deprecated: Use PotentialPattern.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialPattern.GetChance">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=13876:13922#L488">GetChance</a>
+				<h3 id="PotentialPattern.GetChance">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=15443:15489#L531">GetChance</a>
 					<a class="permalink" href="godoc.3.html#PotentialPattern.GetChance">&#xb6;</a>
 					
 					
@@ -923,7 +967,7 @@ Deprecated: Use PotentialPattern.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialPattern.GetPattern">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=13746:13799#L481">GetPattern</a>
+				<h3 id="PotentialPattern.GetPattern">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=15313:15366#L524">GetPattern</a>
 					<a class="permalink" href="godoc.3.html#PotentialPattern.GetPattern">&#xb6;</a>
 					
 					
@@ -935,7 +979,7 @@ Deprecated: Use PotentialPattern.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialPattern.GetPotentialWeeks">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=14197:14260#L509">GetPotentialWeeks</a>
+				<h3 id="PotentialPattern.GetPotentialWeeks">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=15883:15946#L559">GetPotentialWeeks</a>
 					<a class="permalink" href="godoc.3.html#PotentialPattern.GetPotentialWeeks">&#xb6;</a>
 					
 					
@@ -947,7 +991,19 @@ Deprecated: Use PotentialPattern.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialPattern.GetPricesSummary">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=13974:14034#L495">GetPricesSummary</a>
+				<h3 id="PotentialPattern.GetPricesFuture">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=15662:15721#L545">GetPricesFuture</a>
+					<a class="permalink" href="godoc.3.html#PotentialPattern.GetPricesFuture">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#PotentialPattern">PotentialPattern</a>) GetPricesFuture() *<a href="godoc.3.html#PricesSummary">PricesSummary</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="PotentialPattern.GetPricesSummary">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=15541:15601#L538">GetPricesSummary</a>
 					<a class="permalink" href="godoc.3.html#PotentialPattern.GetPricesSummary">&#xb6;</a>
 					
 					
@@ -959,7 +1015,7 @@ Deprecated: Use PotentialPattern.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialPattern.GetSpike">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=14095:14144#L502">GetSpike</a>
+				<h3 id="PotentialPattern.GetSpike">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=15781:15830#L552">GetSpike</a>
 					<a class="permalink" href="godoc.3.html#PotentialPattern.GetSpike">&#xb6;</a>
 					
 					
@@ -971,7 +1027,7 @@ Deprecated: Use PotentialPattern.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialPattern.ProtoMessage">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=13188:13227#L462">ProtoMessage</a>
+				<h3 id="PotentialPattern.ProtoMessage">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=14755:14794#L505">ProtoMessage</a>
 					<a class="permalink" href="godoc.3.html#PotentialPattern.ProtoMessage">&#xb6;</a>
 					
 					
@@ -983,7 +1039,7 @@ Deprecated: Use PotentialPattern.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialPattern.ProtoReflect">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=13232:13294#L464">ProtoReflect</a>
+				<h3 id="PotentialPattern.ProtoReflect">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=14799:14861#L507">ProtoReflect</a>
 					<a class="permalink" href="godoc.3.html#PotentialPattern.ProtoReflect">&#xb6;</a>
 					
 					
@@ -995,7 +1051,7 @@ Deprecated: Use PotentialPattern.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialPattern.Reset">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=12868:12902#L449">Reset</a>
+				<h3 id="PotentialPattern.Reset">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=14435:14469#L492">Reset</a>
 					<a class="permalink" href="godoc.3.html#PotentialPattern.Reset">&#xb6;</a>
 					
 					
@@ -1007,7 +1063,7 @@ Deprecated: Use PotentialPattern.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialPattern.String">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=13101:13143#L458">String</a>
+				<h3 id="PotentialPattern.String">func (*PotentialPattern) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=14668:14710#L501">String</a>
 					<a class="permalink" href="godoc.3.html#PotentialPattern.String">&#xb6;</a>
 					
 					
@@ -1021,7 +1077,7 @@ Deprecated: Use PotentialPattern.ProtoReflect.Descriptor instead.
 		
 			
 			
-			<h2 id="PotentialWeek">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=9957:10747#L360">PotentialWeek</a>
+			<h2 id="PotentialWeek">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=10814:11807#L387">PotentialWeek</a>
 				<a class="permalink" href="godoc.3.html#PotentialWeek">&#xb6;</a>
 				
 				
@@ -1038,6 +1094,8 @@ Describes a potential price fluctuation for a week of a given price pattern.
 <span id="PotentialWeek.Prices"></span>    Prices []*<a href="godoc.3.html#PricePeriod">PricePeriod</a> `protobuf:&#34;bytes,3,rep,name=prices,proto3&#34; json:&#34;prices,omitempty&#34;`
     <span class="comment">// A summary of the prices in this fluctuation.</span>
 <span id="PotentialWeek.PricesSummary"></span>    PricesSummary *<a href="godoc.3.html#PricesSummary">PricesSummary</a> `protobuf:&#34;bytes,4,opt,name=prices_summary,json=pricesSummary,proto3&#34; json:&#34;prices_summary,omitempty&#34;`
+    <span class="comment">// As prices summary, but for the future and current price periods only.</span>
+<span id="PotentialWeek.PricesFuture"></span>    PricesFuture *<a href="godoc.3.html#PricesSummary">PricesSummary</a> `protobuf:&#34;bytes,6,opt,name=prices_future,json=pricesFuture,proto3&#34; json:&#34;prices_future,omitempty&#34;`
     <span class="comment">// A summary of whether there will be a spike and what periods it will occur on.</span>
 <span id="PotentialWeek.Spike"></span>    Spike *<a href="godoc.3.html#SpikeRange">SpikeRange</a> `protobuf:&#34;bytes,5,opt,name=spike,proto3&#34; json:&#34;spike,omitempty&#34;`
     <span class="comment">// contains filtered or unexported fields</span>
@@ -1056,7 +1114,7 @@ Describes a potential price fluctuation for a week of a given price pattern.
 
 			
 				
-				<h3 id="PotentialWeek.Descriptor">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=11487:11537#L403">Descriptor</a>
+				<h3 id="PotentialWeek.Descriptor">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=12547:12597#L432">Descriptor</a>
 					<a class="permalink" href="godoc.3.html#PotentialWeek.Descriptor">&#xb6;</a>
 					
 					
@@ -1071,7 +1129,7 @@ Deprecated: Use PotentialWeek.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialWeek.GetChance">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=11606:11649#L407">GetChance</a>
+				<h3 id="PotentialWeek.GetChance">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=12666:12709#L436">GetChance</a>
 					<a class="permalink" href="godoc.3.html#PotentialWeek.GetChance">&#xb6;</a>
 					
 					
@@ -1083,7 +1141,7 @@ Deprecated: Use PotentialWeek.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialWeek.GetPrices">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=11701:11751#L414">GetPrices</a>
+				<h3 id="PotentialWeek.GetPrices">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=12761:12811#L443">GetPrices</a>
 					<a class="permalink" href="godoc.3.html#PotentialWeek.GetPrices">&#xb6;</a>
 					
 					
@@ -1095,7 +1153,19 @@ Deprecated: Use PotentialWeek.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialWeek.GetPricesSummary">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=11805:11862#L421">GetPricesSummary</a>
+				<h3 id="PotentialWeek.GetPricesFuture">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=12983:13039#L457">GetPricesFuture</a>
+					<a class="permalink" href="godoc.3.html#PotentialWeek.GetPricesFuture">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#PotentialWeek">PotentialWeek</a>) GetPricesFuture() *<a href="godoc.3.html#PricesSummary">PricesSummary</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="PotentialWeek.GetPricesSummary">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=12865:12922#L450">GetPricesSummary</a>
 					<a class="permalink" href="godoc.3.html#PotentialWeek.GetPricesSummary">&#xb6;</a>
 					
 					
@@ -1107,7 +1177,7 @@ Deprecated: Use PotentialWeek.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialWeek.GetSpike">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=11923:11969#L428">GetSpike</a>
+				<h3 id="PotentialWeek.GetSpike">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=13099:13145#L464">GetSpike</a>
 					<a class="permalink" href="godoc.3.html#PotentialWeek.GetSpike">&#xb6;</a>
 					
 					
@@ -1119,7 +1189,7 @@ Deprecated: Use PotentialWeek.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialWeek.ProtoMessage">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=11060:11096#L388">ProtoMessage</a>
+				<h3 id="PotentialWeek.ProtoMessage">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=12120:12156#L417">ProtoMessage</a>
 					<a class="permalink" href="godoc.3.html#PotentialWeek.ProtoMessage">&#xb6;</a>
 					
 					
@@ -1131,7 +1201,7 @@ Deprecated: Use PotentialWeek.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialWeek.ProtoReflect">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=11101:11160#L390">ProtoReflect</a>
+				<h3 id="PotentialWeek.ProtoReflect">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=12161:12220#L419">ProtoReflect</a>
 					<a class="permalink" href="godoc.3.html#PotentialWeek.ProtoReflect">&#xb6;</a>
 					
 					
@@ -1143,7 +1213,7 @@ Deprecated: Use PotentialWeek.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialWeek.Reset">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=10749:10780#L375">Reset</a>
+				<h3 id="PotentialWeek.Reset">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=11809:11840#L404">Reset</a>
 					<a class="permalink" href="godoc.3.html#PotentialWeek.Reset">&#xb6;</a>
 					
 					
@@ -1155,7 +1225,7 @@ Deprecated: Use PotentialWeek.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PotentialWeek.String">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=10976:11015#L384">String</a>
+				<h3 id="PotentialWeek.String">func (*PotentialWeek) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=12036:12075#L413">String</a>
 					<a class="permalink" href="godoc.3.html#PotentialWeek.String">&#xb6;</a>
 					
 					
@@ -1278,7 +1348,7 @@ Deprecated: Use PricePatterns.Descriptor instead.
 		
 			
 			
-			<h2 id="PricePeriod">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=4492:5003#L150">PricePeriod</a>
+			<h2 id="PricePeriod">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=4768:5279#L159">PricePeriod</a>
 				<a class="permalink" href="godoc.3.html#PricePeriod">&#xb6;</a>
 				
 				
@@ -1310,7 +1380,7 @@ Price info for a single price period.
 
 			
 				
-				<h3 id="PricePeriod.Descriptor">func (*PricePeriod) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=5731:5779#L190">Descriptor</a>
+				<h3 id="PricePeriod.Descriptor">func (*PricePeriod) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=6007:6055#L199">Descriptor</a>
 					<a class="permalink" href="godoc.3.html#PricePeriod.Descriptor">&#xb6;</a>
 					
 					
@@ -1325,7 +1395,7 @@ Deprecated: Use PricePeriod.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PricePeriod.GetIsSpike">func (*PricePeriod) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=6018:6057#L208">GetIsSpike</a>
+				<h3 id="PricePeriod.GetIsSpike">func (*PricePeriod) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=6294:6333#L217">GetIsSpike</a>
 					<a class="permalink" href="godoc.3.html#PricePeriod.GetIsSpike">&#xb6;</a>
 					
 					
@@ -1337,7 +1407,7 @@ Deprecated: Use PricePeriod.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PricePeriod.GetMax">func (*PricePeriod) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=5933:5969#L201">GetMax</a>
+				<h3 id="PricePeriod.GetMax">func (*PricePeriod) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=6209:6245#L210">GetMax</a>
 					<a class="permalink" href="godoc.3.html#PricePeriod.GetMax">&#xb6;</a>
 					
 					
@@ -1349,7 +1419,7 @@ Deprecated: Use PricePeriod.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PricePeriod.GetMin">func (*PricePeriod) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=5848:5884#L194">GetMin</a>
+				<h3 id="PricePeriod.GetMin">func (*PricePeriod) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=6124:6160#L203">GetMin</a>
 					<a class="permalink" href="godoc.3.html#PricePeriod.GetMin">&#xb6;</a>
 					
 					
@@ -1361,7 +1431,7 @@ Deprecated: Use PricePeriod.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PricePeriod.ProtoMessage">func (*PricePeriod) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=5310:5344#L175">ProtoMessage</a>
+				<h3 id="PricePeriod.ProtoMessage">func (*PricePeriod) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=5586:5620#L184">ProtoMessage</a>
 					<a class="permalink" href="godoc.3.html#PricePeriod.ProtoMessage">&#xb6;</a>
 					
 					
@@ -1373,7 +1443,7 @@ Deprecated: Use PricePeriod.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PricePeriod.ProtoReflect">func (*PricePeriod) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=5349:5406#L177">ProtoReflect</a>
+				<h3 id="PricePeriod.ProtoReflect">func (*PricePeriod) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=5625:5682#L186">ProtoReflect</a>
 					<a class="permalink" href="godoc.3.html#PricePeriod.ProtoReflect">&#xb6;</a>
 					
 					
@@ -1385,7 +1455,7 @@ Deprecated: Use PricePeriod.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PricePeriod.Reset">func (*PricePeriod) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=5005:5034#L162">Reset</a>
+				<h3 id="PricePeriod.Reset">func (*PricePeriod) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=5281:5310#L171">Reset</a>
 					<a class="permalink" href="godoc.3.html#PricePeriod.Reset">&#xb6;</a>
 					
 					
@@ -1397,7 +1467,7 @@ Deprecated: Use PricePeriod.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PricePeriod.String">func (*PricePeriod) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=5228:5265#L171">String</a>
+				<h3 id="PricePeriod.String">func (*PricePeriod) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=5504:5541#L180">String</a>
 					<a class="permalink" href="godoc.3.html#PricePeriod.String">&#xb6;</a>
 					
 					
@@ -1411,7 +1481,7 @@ Deprecated: Use PricePeriod.ProtoReflect.Descriptor instead.
 		
 			
 			
-			<h2 id="PricesSummary">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=6152:6983#L216">PricesSummary</a>
+			<h2 id="PricesSummary">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=6428:7620#L225">PricesSummary</a>
 				<a class="permalink" href="godoc.3.html#PricesSummary">&#xb6;</a>
 				
 				
@@ -1422,15 +1492,19 @@ Price info for a series of prices.
 
 			<pre>type PricesSummary struct {
 
-    <span class="comment">// The minimum guaranteed price for the parent. This is the highest minimum price</span>
-    <span class="comment">// we can say will happen with 100% certainty.</span>
+    <span class="comment">// The absolute minimum price of the parent object.</span>
 <span id="PricesSummary.Min"></span>    Min <a href="http://localhost:6161/pkg/builtin/#int32">int32</a> `protobuf:&#34;varint,1,opt,name=min,proto3&#34; json:&#34;min,omitempty&#34;`
     <span class="comment">// The potential maximum price of the parent object.</span>
 <span id="PricesSummary.Max"></span>    Max <a href="http://localhost:6161/pkg/builtin/#int32">int32</a> `protobuf:&#34;varint,2,opt,name=max,proto3&#34; json:&#34;max,omitempty&#34;`
+    <span class="comment">// The maximum guaranteed price for the parent. This is the minimum highest price</span>
+    <span class="comment">// we can say will happen with 100% certainty.</span>
+<span id="PricesSummary.Guaranteed"></span>    Guaranteed <a href="http://localhost:6161/pkg/builtin/#int32">int32</a> `protobuf:&#34;varint,6,opt,name=guaranteed,proto3&#34; json:&#34;guaranteed,omitempty&#34;`
     <span class="comment">// The price periods during which ``min`` might occur.</span>
 <span id="PricesSummary.MinPeriods"></span>    MinPeriods []<a href="http://localhost:6161/pkg/builtin/#int32">int32</a> `protobuf:&#34;varint,3,rep,packed,name=min_periods,json=minPeriods,proto3&#34; json:&#34;min_periods,omitempty&#34;`
     <span class="comment">// The price periods during which ``max`` might occur.</span>
 <span id="PricesSummary.MaxPeriods"></span>    MaxPeriods []<a href="http://localhost:6161/pkg/builtin/#int32">int32</a> `protobuf:&#34;varint,4,rep,packed,name=max_periods,json=maxPeriods,proto3&#34; json:&#34;max_periods,omitempty&#34;`
+    <span class="comment">// The price periods during which ``guaranteed`` might occur.</span>
+<span id="PricesSummary.GuaranteedPeriods"></span>    GuaranteedPeriods []<a href="http://localhost:6161/pkg/builtin/#int32">int32</a> `protobuf:&#34;varint,5,rep,packed,name=guaranteed_periods,json=guaranteedPeriods,proto3&#34; json:&#34;guaranteed_periods,omitempty&#34;`
     <span class="comment">// contains filtered or unexported fields</span>
 }
 </pre>
@@ -1447,7 +1521,7 @@ Price info for a series of prices.
 
 			
 				
-				<h3 id="PricesSummary.Descriptor">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=7723:7773#L260">Descriptor</a>
+				<h3 id="PricesSummary.Descriptor">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=8360:8410#L273">Descriptor</a>
 					<a class="permalink" href="godoc.3.html#PricesSummary.Descriptor">&#xb6;</a>
 					
 					
@@ -1462,7 +1536,31 @@ Deprecated: Use PricesSummary.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PricesSummary.GetMax">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=7929:7967#L271">GetMax</a>
+				<h3 id="PricesSummary.GetGuaranteed">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=8653:8698#L291">GetGuaranteed</a>
+					<a class="permalink" href="godoc.3.html#PricesSummary.GetGuaranteed">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#PricesSummary">PricesSummary</a>) GetGuaranteed() <a href="http://localhost:6161/pkg/builtin/#int32">int32</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="PricesSummary.GetGuaranteedPeriods">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=8964:9018#L312">GetGuaranteedPeriods</a>
+					<a class="permalink" href="godoc.3.html#PricesSummary.GetGuaranteedPeriods">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#PricesSummary">PricesSummary</a>) GetGuaranteedPeriods() []<a href="http://localhost:6161/pkg/builtin/#int32">int32</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="PricesSummary.GetMax">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=8566:8604#L284">GetMax</a>
 					<a class="permalink" href="godoc.3.html#PricesSummary.GetMax">&#xb6;</a>
 					
 					
@@ -1474,7 +1572,7 @@ Deprecated: Use PricesSummary.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PricesSummary.GetMaxPeriods">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=8121:8168#L285">GetMaxPeriods</a>
+				<h3 id="PricesSummary.GetMaxPeriods">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=8859:8906#L305">GetMaxPeriods</a>
 					<a class="permalink" href="godoc.3.html#PricesSummary.GetMaxPeriods">&#xb6;</a>
 					
 					
@@ -1486,7 +1584,7 @@ Deprecated: Use PricesSummary.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PricesSummary.GetMin">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=7842:7880#L264">GetMin</a>
+				<h3 id="PricesSummary.GetMin">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=8479:8517#L277">GetMin</a>
 					<a class="permalink" href="godoc.3.html#PricesSummary.GetMin">&#xb6;</a>
 					
 					
@@ -1498,7 +1596,7 @@ Deprecated: Use PricesSummary.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PricesSummary.GetMinPeriods">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=8016:8063#L278">GetMinPeriods</a>
+				<h3 id="PricesSummary.GetMinPeriods">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=8754:8801#L298">GetMinPeriods</a>
 					<a class="permalink" href="godoc.3.html#PricesSummary.GetMinPeriods">&#xb6;</a>
 					
 					
@@ -1510,7 +1608,7 @@ Deprecated: Use PricesSummary.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PricesSummary.ProtoMessage">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=7296:7332#L245">ProtoMessage</a>
+				<h3 id="PricesSummary.ProtoMessage">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=7933:7969#L258">ProtoMessage</a>
 					<a class="permalink" href="godoc.3.html#PricesSummary.ProtoMessage">&#xb6;</a>
 					
 					
@@ -1522,7 +1620,7 @@ Deprecated: Use PricesSummary.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PricesSummary.ProtoReflect">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=7337:7396#L247">ProtoReflect</a>
+				<h3 id="PricesSummary.ProtoReflect">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=7974:8033#L260">ProtoReflect</a>
 					<a class="permalink" href="godoc.3.html#PricesSummary.ProtoReflect">&#xb6;</a>
 					
 					
@@ -1534,7 +1632,7 @@ Deprecated: Use PricesSummary.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PricesSummary.Reset">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=6985:7016#L232">Reset</a>
+				<h3 id="PricesSummary.Reset">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=7622:7653#L245">Reset</a>
 					<a class="permalink" href="godoc.3.html#PricesSummary.Reset">&#xb6;</a>
 					
 					
@@ -1546,7 +1644,7 @@ Deprecated: Use PricesSummary.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="PricesSummary.String">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=7212:7251#L241">String</a>
+				<h3 id="PricesSummary.String">func (*PricesSummary) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=7849:7888#L254">String</a>
 					<a class="permalink" href="godoc.3.html#PricesSummary.String">&#xb6;</a>
 					
 					
@@ -1560,7 +1658,7 @@ Deprecated: Use PricesSummary.ProtoReflect.Descriptor instead.
 		
 			
 			
-			<h2 id="SpikeChances">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=14364:15237#L517">SpikeChances</a>
+			<h2 id="SpikeChances">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=16050:16923#L567">SpikeChances</a>
 				<a class="permalink" href="godoc.3.html#SpikeChances">&#xb6;</a>
 				
 				
@@ -1598,7 +1696,7 @@ Spike info for the overall prediction.
 
 			
 				
-				<h3 id="SpikeChances.Descriptor">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=15971:16020#L563">Descriptor</a>
+				<h3 id="SpikeChances.Descriptor">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=17657:17706#L613">Descriptor</a>
 					<a class="permalink" href="godoc.3.html#SpikeChances.Descriptor">&#xb6;</a>
 					
 					
@@ -1613,7 +1711,7 @@ Deprecated: Use SpikeChances.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="SpikeChances.GetBreakdown">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=16448:16495#L595">GetBreakdown</a>
+				<h3 id="SpikeChances.GetBreakdown">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=18134:18181#L645">GetBreakdown</a>
 					<a class="permalink" href="godoc.3.html#SpikeChances.GetBreakdown">&#xb6;</a>
 					
 					
@@ -1625,7 +1723,7 @@ Deprecated: Use SpikeChances.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="SpikeChances.GetChance">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=16354:16396#L588">GetChance</a>
+				<h3 id="SpikeChances.GetChance">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=18040:18082#L638">GetChance</a>
 					<a class="permalink" href="godoc.3.html#SpikeChances.GetChance">&#xb6;</a>
 					
 					
@@ -1637,7 +1735,7 @@ Deprecated: Use SpikeChances.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="SpikeChances.GetEnd">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=16268:16305#L581">GetEnd</a>
+				<h3 id="SpikeChances.GetEnd">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=17954:17991#L631">GetEnd</a>
 					<a class="permalink" href="godoc.3.html#SpikeChances.GetEnd">&#xb6;</a>
 					
 					
@@ -1649,7 +1747,7 @@ Deprecated: Use SpikeChances.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="SpikeChances.GetHas">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=16089:16125#L567">GetHas</a>
+				<h3 id="SpikeChances.GetHas">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=17775:17811#L617">GetHas</a>
 					<a class="permalink" href="godoc.3.html#SpikeChances.GetHas">&#xb6;</a>
 					
 					
@@ -1661,7 +1759,7 @@ Deprecated: Use SpikeChances.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="SpikeChances.GetStart">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=16178:16217#L574">GetStart</a>
+				<h3 id="SpikeChances.GetStart">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=17864:17903#L624">GetStart</a>
 					<a class="permalink" href="godoc.3.html#SpikeChances.GetStart">&#xb6;</a>
 					
 					
@@ -1673,7 +1771,7 @@ Deprecated: Use SpikeChances.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="SpikeChances.ProtoMessage">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=15547:15582#L548">ProtoMessage</a>
+				<h3 id="SpikeChances.ProtoMessage">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=17233:17268#L598">ProtoMessage</a>
 					<a class="permalink" href="godoc.3.html#SpikeChances.ProtoMessage">&#xb6;</a>
 					
 					
@@ -1685,7 +1783,7 @@ Deprecated: Use SpikeChances.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="SpikeChances.ProtoReflect">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=15587:15645#L550">ProtoReflect</a>
+				<h3 id="SpikeChances.ProtoReflect">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=17273:17331#L600">ProtoReflect</a>
 					<a class="permalink" href="godoc.3.html#SpikeChances.ProtoReflect">&#xb6;</a>
 					
 					
@@ -1697,7 +1795,7 @@ Deprecated: Use SpikeChances.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="SpikeChances.Reset">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=15239:15269#L535">Reset</a>
+				<h3 id="SpikeChances.Reset">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=16925:16955#L585">Reset</a>
 					<a class="permalink" href="godoc.3.html#SpikeChances.Reset">&#xb6;</a>
 					
 					
@@ -1709,7 +1807,7 @@ Deprecated: Use SpikeChances.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="SpikeChances.String">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=15464:15502#L544">String</a>
+				<h3 id="SpikeChances.String">func (*SpikeChances) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=17150:17188#L594">String</a>
 					<a class="permalink" href="godoc.3.html#SpikeChances.String">&#xb6;</a>
 					
 					
@@ -1723,7 +1821,7 @@ Deprecated: Use SpikeChances.ProtoReflect.Descriptor instead.
 		
 			
 			
-			<h2 id="SpikeRange">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=8271:8780#L293">SpikeRange</a>
+			<h2 id="SpikeRange">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=9128:9637#L320">SpikeRange</a>
 				<a class="permalink" href="godoc.3.html#SpikeRange">&#xb6;</a>
 				
 				
@@ -1756,7 +1854,7 @@ Spike info for weeks, weeks and patterns.
 
 			
 				
-				<h3 id="SpikeRange.Descriptor">func (*SpikeRange) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=9502:9549#L334">Descriptor</a>
+				<h3 id="SpikeRange.Descriptor">func (*SpikeRange) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=10359:10406#L361">Descriptor</a>
 					<a class="permalink" href="godoc.3.html#SpikeRange.Descriptor">&#xb6;</a>
 					
 					
@@ -1771,7 +1869,7 @@ Deprecated: Use SpikeRange.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="SpikeRange.GetEnd">func (*SpikeRange) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=9793:9828#L352">GetEnd</a>
+				<h3 id="SpikeRange.GetEnd">func (*SpikeRange) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=10650:10685#L379">GetEnd</a>
 					<a class="permalink" href="godoc.3.html#SpikeRange.GetEnd">&#xb6;</a>
 					
 					
@@ -1783,7 +1881,7 @@ Deprecated: Use SpikeRange.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="SpikeRange.GetHas">func (*SpikeRange) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=9618:9652#L338">GetHas</a>
+				<h3 id="SpikeRange.GetHas">func (*SpikeRange) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=10475:10509#L365">GetHas</a>
 					<a class="permalink" href="godoc.3.html#SpikeRange.GetHas">&#xb6;</a>
 					
 					
@@ -1795,7 +1893,7 @@ Deprecated: Use SpikeRange.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="SpikeRange.GetStart">func (*SpikeRange) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=9705:9742#L345">GetStart</a>
+				<h3 id="SpikeRange.GetStart">func (*SpikeRange) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=10562:10599#L372">GetStart</a>
 					<a class="permalink" href="godoc.3.html#SpikeRange.GetStart">&#xb6;</a>
 					
 					
@@ -1807,7 +1905,7 @@ Deprecated: Use SpikeRange.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="SpikeRange.ProtoMessage">func (*SpikeRange) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=9084:9117#L319">ProtoMessage</a>
+				<h3 id="SpikeRange.ProtoMessage">func (*SpikeRange) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=9941:9974#L346">ProtoMessage</a>
 					<a class="permalink" href="godoc.3.html#SpikeRange.ProtoMessage">&#xb6;</a>
 					
 					
@@ -1819,7 +1917,7 @@ Deprecated: Use SpikeRange.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="SpikeRange.ProtoReflect">func (*SpikeRange) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=9122:9178#L321">ProtoReflect</a>
+				<h3 id="SpikeRange.ProtoReflect">func (*SpikeRange) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=9979:10035#L348">ProtoReflect</a>
 					<a class="permalink" href="godoc.3.html#SpikeRange.ProtoReflect">&#xb6;</a>
 					
 					
@@ -1831,7 +1929,7 @@ Deprecated: Use SpikeRange.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="SpikeRange.Reset">func (*SpikeRange) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=8782:8810#L306">Reset</a>
+				<h3 id="SpikeRange.Reset">func (*SpikeRange) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=9639:9667#L333">Reset</a>
 					<a class="permalink" href="godoc.3.html#SpikeRange.Reset">&#xb6;</a>
 					
 					
@@ -1843,7 +1941,7 @@ Deprecated: Use SpikeRange.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="SpikeRange.String">func (*SpikeRange) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=9003:9039#L315">String</a>
+				<h3 id="SpikeRange.String">func (*SpikeRange) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=9860:9896#L342">String</a>
 					<a class="permalink" href="godoc.3.html#SpikeRange.String">&#xb6;</a>
 					
 					
@@ -1857,7 +1955,7 @@ Deprecated: Use SpikeRange.ProtoReflect.Descriptor instead.
 		
 			
 			
-			<h2 id="StalkForecasterClient">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=36563:36759#L1037">StalkForecasterClient</a>
+			<h2 id="StalkForecasterClient">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=40747:40943#L1121">StalkForecasterClient</a>
 				<a class="permalink" href="godoc.3.html#StalkForecasterClient">&#xb6;</a>
 				
 				
@@ -1884,7 +1982,7 @@ For semantics around ctx use and closing/ending streaming RPCs, please refer to 
 
 			
 				
-				<h3 id="NewStalkForecasterClient">func <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=36829:36909#L1046">NewStalkForecasterClient</a>
+				<h3 id="NewStalkForecasterClient">func <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=41013:41093#L1130">NewStalkForecasterClient</a>
 					<a class="permalink" href="godoc.3.html#NewStalkForecasterClient">&#xb6;</a>
 					
 					
@@ -1899,7 +1997,7 @@ For semantics around ctx use and closing/ending streaming RPCs, please refer to 
 		
 			
 			
-			<h2 id="StalkForecasterServer">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=37312:37476#L1060">StalkForecasterServer</a>
+			<h2 id="StalkForecasterServer">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=41496:41660#L1144">StalkForecasterServer</a>
 				<a class="permalink" href="godoc.3.html#StalkForecasterServer">&#xb6;</a>
 				
 				
@@ -1927,7 +2025,7 @@ StalkForecasterServer is the server API for StalkForecaster service.
 		
 			
 			
-			<h2 id="Ticker">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=2406:3315#L80">Ticker</a>
+			<h2 id="Ticker">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=2406:3491#L80">Ticker</a>
 				<a class="permalink" href="godoc.3.html#Ticker">&#xb6;</a>
 				
 				
@@ -1947,6 +2045,8 @@ Island price data sent when requesting a prediction
     <span class="comment">// 12 values, it is assumed the remaining values are 0. The server will reject a</span>
     <span class="comment">// ticker with less than 12 values</span>
 <span id="Ticker.Prices"></span>    Prices []<a href="http://localhost:6161/pkg/builtin/#int32">int32</a> `protobuf:&#34;varint,3,rep,packed,name=prices,proto3&#34; json:&#34;prices,omitempty&#34;`
+    <span class="comment">// The current price period on the target island.</span>
+<span id="Ticker.CurrentPeriod"></span>    CurrentPeriod <a href="http://localhost:6161/pkg/builtin/#int32">int32</a> `protobuf:&#34;varint,4,opt,name=current_period,json=currentPeriod,proto3&#34; json:&#34;current_period,omitempty&#34;`
     <span class="comment">// contains filtered or unexported fields</span>
 }
 </pre>
@@ -1963,7 +2063,7 @@ Island price data sent when requesting a prediction
 
 			
 				
-				<h3 id="Ticker.Descriptor">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=4013:4056#L124">Descriptor</a>
+				<h3 id="Ticker.Descriptor">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=4189:4232#L126">Descriptor</a>
 					<a class="permalink" href="godoc.3.html#Ticker.Descriptor">&#xb6;</a>
 					
 					
@@ -1978,7 +2078,19 @@ Deprecated: Use Ticker.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="Ticker.GetPreviousPattern">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=4225:4276#L135">GetPreviousPattern</a>
+				<h3 id="Ticker.GetCurrentPeriod">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=4627:4668#L151">GetCurrentPeriod</a>
+					<a class="permalink" href="godoc.3.html#Ticker.GetCurrentPeriod">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="godoc.3.html#Ticker">Ticker</a>) GetCurrentPeriod() <a href="http://localhost:6161/pkg/builtin/#int32">int32</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Ticker.GetPreviousPattern">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=4401:4452#L137">GetPreviousPattern</a>
 					<a class="permalink" href="godoc.3.html#Ticker.GetPreviousPattern">&#xb6;</a>
 					
 					
@@ -1990,7 +2102,7 @@ Deprecated: Use Ticker.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="Ticker.GetPrices">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=4361:4397#L142">GetPrices</a>
+				<h3 id="Ticker.GetPrices">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=4537:4573#L144">GetPrices</a>
 					<a class="permalink" href="godoc.3.html#Ticker.GetPrices">&#xb6;</a>
 					
 					
@@ -2002,7 +2114,7 @@ Deprecated: Use Ticker.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="Ticker.GetPurchasePrice">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=4125:4166#L128">GetPurchasePrice</a>
+				<h3 id="Ticker.GetPurchasePrice">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=4301:4342#L130">GetPurchasePrice</a>
 					<a class="permalink" href="godoc.3.html#Ticker.GetPurchasePrice">&#xb6;</a>
 					
 					
@@ -2014,7 +2126,7 @@ Deprecated: Use Ticker.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="Ticker.ProtoMessage">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=3607:3636#L109">ProtoMessage</a>
+				<h3 id="Ticker.ProtoMessage">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=3783:3812#L111">ProtoMessage</a>
 					<a class="permalink" href="godoc.3.html#Ticker.ProtoMessage">&#xb6;</a>
 					
 					
@@ -2026,7 +2138,7 @@ Deprecated: Use Ticker.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="Ticker.ProtoReflect">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=3641:3693#L111">ProtoReflect</a>
+				<h3 id="Ticker.ProtoReflect">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=3817:3869#L113">ProtoReflect</a>
 					<a class="permalink" href="godoc.3.html#Ticker.ProtoReflect">&#xb6;</a>
 					
 					
@@ -2038,7 +2150,7 @@ Deprecated: Use Ticker.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="Ticker.Reset">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=3317:3341#L96">Reset</a>
+				<h3 id="Ticker.Reset">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=3493:3517#L98">Reset</a>
 					<a class="permalink" href="godoc.3.html#Ticker.Reset">&#xb6;</a>
 					
 					
@@ -2050,7 +2162,7 @@ Deprecated: Use Ticker.ProtoReflect.Descriptor instead.
 				
 			
 				
-				<h3 id="Ticker.String">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=3530:3562#L105">String</a>
+				<h3 id="Ticker.String">func (*Ticker) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=3706:3738#L107">String</a>
 					<a class="permalink" href="godoc.3.html#Ticker.String">&#xb6;</a>
 					
 					
@@ -2064,7 +2176,7 @@ Deprecated: Use Ticker.ProtoReflect.Descriptor instead.
 		
 			
 			
-			<h2 id="UnimplementedStalkForecasterServer">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=37576:37626#L1066">UnimplementedStalkForecasterServer</a>
+			<h2 id="UnimplementedStalkForecasterServer">type <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=41760:41810#L1150">UnimplementedStalkForecasterServer</a>
 				<a class="permalink" href="godoc.3.html#UnimplementedStalkForecasterServer">&#xb6;</a>
 				
 				
@@ -2089,7 +2201,7 @@ UnimplementedStalkForecasterServer can be embedded to have forward compatible im
 
 			
 				
-				<h3 id="UnimplementedStalkForecasterServer.ForecastPrices">func (*UnimplementedStalkForecasterServer) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=37628:37730#L1069">ForecastPrices</a>
+				<h3 id="UnimplementedStalkForecasterServer.ForecastPrices">func (*UnimplementedStalkForecasterServer) <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/gen/stalk-proto/service.pb.go?s=41812:41914#L1153">ForecastPrices</a>
 					<a class="permalink" href="godoc.3.html#UnimplementedStalkForecasterServer.ForecastPrices">&#xb6;</a>
 					
 					
