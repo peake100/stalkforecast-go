@@ -26,8 +26,8 @@ func serializePriceSeries(series *models.PriceSeries) *proto.PricesSummary {
 
 func serializeBreakdown(breakdown *models.SpikeChanceBreakdown) []float64 {
 	breakdownSerialized := make([]float64, len(breakdown))
-	for _, chance := range breakdown {
-		breakdownSerialized = append(breakdownSerialized, chance)
+	for i, chance := range breakdown {
+		breakdownSerialized[i] = chance
 	}
 	return breakdownSerialized
 }
