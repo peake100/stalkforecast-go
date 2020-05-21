@@ -2,7 +2,7 @@ package servers
 
 import (
 	"context"
-	"github.com/peake100/stalkforecaster-go/gen/stalk-proto"
+	"github.com/peake100/stalkforecaster-go/protogen/stalk_proto"
 	"github.com/peake100/turnup-go"
 	"github.com/peake100/turnup-go/models"
 	"google.golang.org/grpc"
@@ -13,8 +13,8 @@ import (
 type StalkForecastServer struct{}
 
 func (server *StalkForecastServer) ForecastPrices(
-	ctx context.Context, ticker *proto.Ticker,
-) (*proto.Forecast, error) {
+	ctx context.Context, ticker *stalkproto.Ticker,
+) (*stalkproto.Forecast, error) {
 	// Deserialize the proto object into the turnup ticker object
 	turnupTicker := turnup.NewPriceTicker(
 		int(ticker.PurchasePrice), models.PricePattern(ticker.PreviousPattern),
@@ -45,7 +45,7 @@ func makeService() (service *grpc.Server, listener net.Listener, err error) {
 		return nil, nil, err
 	}
 	service = grpc.NewServer()
-	proto.RegisterStalkForecasterServer(service, new(StalkForecastServer))
+	stalkproto.RegisterStalkForecasterServer(service, new(StalkForecastServer))
 	return service, listener, nil
 }
 

@@ -88,8 +88,8 @@ name:
 
 .PHONY: proto
 proto:
-	protoc --go_out=plugins=grpc:./gen --go_opt=paths=source_relative ./stalk-proto/service.proto
-	protoc -I. --grpc-gateway_out=logtostderr=true,paths=source_relative:./gen ./stalk-proto/service.proto
+	protoc --go_out=plugins=grpc:./protogen --go_opt=paths=source_relative ./stalk_proto/forecaster.proto ./stalk_proto/models.proto
+	protoc -I. --grpc-gateway_out=logtostderr=true,paths=source_relative:./protogen ./stalk_proto/forecaster.proto ./stalk_proto/models.proto
 
 .PHONY: image-dev
 image-dev:

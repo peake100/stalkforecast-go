@@ -5,7 +5,7 @@ package service
 
 import (
 	"context"
-	"github.com/peake100/stalkforecaster-go/gen/stalk-proto"
+	"github.com/peake100/stalkforecaster-go/protogen/stalk_proto"
 	"github.com/peake100/stalkforecaster-go/service/servers"
 	"github.com/stretchr/testify/suite"
 	"google.golang.org/grpc"
@@ -23,12 +23,12 @@ func requestTimeout() (context.Context, context.CancelFunc) {
 type TestBasicPredictionSuite struct {
 	suite.Suite
 	monitor    *servers.ServersMonitor
-	client     proto.StalkForecasterClient
+	client     stalkproto.StalkForecasterClient
 	clientConn *grpc.ClientConn
 
 	grpcAddress string
 
-	forecast *proto.Forecast
+	forecast *stalkproto.Forecast
 }
 
 func (suite *TestBasicPredictionSuite) SetupSuite() {
@@ -61,7 +61,7 @@ func (suite *TestBasicPredictionSuite) SetupSuite() {
 	}
 	log.Println("grpc client connected")
 
-	suite.client = proto.NewStalkForecasterClient(conn)
+	suite.client = stalkproto.NewStalkForecasterClient(conn)
 	suite.clientConn = conn
 }
 
@@ -72,9 +72,9 @@ func (suite *TestBasicPredictionSuite) TearDownSuite() {
 }
 
 func (suite *TestBasicPredictionSuite) TestForecaster() {
-	ticker := &proto.Ticker{
+	ticker := &stalkproto.Ticker{
 		PurchasePrice:   100,
-		PreviousPattern: proto.PricePatterns_UNKNOWN,
+		PreviousPattern: stalkproto.PricePatterns_UNKNOWN,
 		Prices:          make([]int32, 12),
 	}
 
