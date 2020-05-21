@@ -175,7 +175,22 @@
         
           
           <li>
-            <a href="#stalk-proto%2fservice.proto">stalk-proto/service.proto</a>
+            <a href="#stalk_proto%2fforecaster.proto">stalk_proto/forecaster.proto</a>
+            <ul>
+              
+              
+              
+              
+                <li>
+                  <a href="#proto.StalkForecaster"><span class="badge">S</span>StalkForecaster</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#stalk_proto%2fmodels.proto">stalk_proto/models.proto</a>
             <ul>
               
                 <li>
@@ -203,6 +218,14 @@
                 </li>
               
                 <li>
+                  <a href="#proto.ReqForecastChart"><span class="badge">M</span>ReqForecastChart</a>
+                </li>
+              
+                <li>
+                  <a href="#proto.RespChart"><span class="badge">M</span>RespChart</a>
+                </li>
+              
+                <li>
                   <a href="#proto.SpikeChances"><span class="badge">M</span>SpikeChances</a>
                 </li>
               
@@ -216,14 +239,14 @@
               
               
                 <li>
+                  <a href="#proto.ImageFormat"><span class="badge">E</span>ImageFormat</a>
+                </li>
+              
+                <li>
                   <a href="#proto.PricePatterns"><span class="badge">E</span>PricePatterns</a>
                 </li>
               
               
-              
-                <li>
-                  <a href="#proto.StalkForecaster"><span class="badge">S</span>StalkForecaster</a>
-                </li>
               
             </ul>
           </li>
@@ -235,7 +258,68 @@
     
       
       <div class="file-heading">
-        <h2 id="stalk-proto/service.proto">stalk-proto/service.proto</h2><a href="#title">Top</a>
+        <h2 id="stalk_proto/forecaster.proto">stalk_proto/forecaster.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+
+      
+
+      
+
+      
+        <h3 id="proto.StalkForecaster">StalkForecaster</h3>
+        <p>The forecasting service definition.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ForecastPrices</td>
+                <td><a href="#proto.Ticker">Ticker</a></td>
+                <td><a href="#proto.Forecast">Forecast</a></td>
+                <td><p>Returns a turnip price forecast for supplied price ticker.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+          
+          
+          <h4>Methods with HTTP bindings</h4>
+          <table>
+            <thead>
+              <tr>
+                <td>Method Name</td>
+                <td>Method</td>
+                <td>Pattern</td>
+                <td>Body</td>
+              </tr>
+            </thead>
+            <tbody>
+            
+              
+              
+              <tr>
+                <td>ForecastPrices</td>
+                <td>POST</td>
+                <td>/api/forecast</td>
+                <td>*</td>
+              </tr>
+              
+            
+            </tbody>
+          </table>
+          
+        
+    
+      
+      <div class="file-heading">
+        <h2 id="stalk_proto/models.proto">stalk_proto/models.proto</h2><a href="#title">Top</a>
       </div>
       <p></p>
 
@@ -532,6 +616,68 @@ we can say will happen with 100% certainty. </p></td>
 
         
       
+        <h3 id="proto.ReqForecastChart">ReqForecastChart</h3>
+        <p>Request message for creating a turnip forecast chart.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ticker</td>
+                  <td><a href="#proto.Ticker">Ticker</a></td>
+                  <td></td>
+                  <td><p>Price ticker of the current prices on the island. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>forecast</td>
+                  <td><a href="#proto.Forecast">Forecast</a></td>
+                  <td></td>
+                  <td><p>The forecast for future prices on the the island. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>format</td>
+                  <td><a href="#proto.ImageFormat">ImageFormat</a></td>
+                  <td></td>
+                  <td><p>desired image format </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="proto.RespChart">RespChart</h3>
+        <p>Response message with a rendered svg chart.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>chart</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>Binary image bytes for rendered chart. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="proto.SpikeChances">SpikeChances</h3>
         <p>Spike info for the overall prediction.</p>
 
@@ -673,6 +819,29 @@ ticker with less than 12 values </p></td>
       
 
       
+        <h3 id="proto.ImageFormat">ImageFormat</h3>
+        <p>Supported chart image formats</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>SVG</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>PNG</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
         <h3 id="proto.PricePatterns">PricePatterns</h3>
         <p>Enum of the price patterns that can occur in animal crossing.</p>
         <table class="enum-table">
@@ -718,53 +887,6 @@ ticker with less than 12 values </p></td>
       
 
       
-        <h3 id="proto.StalkForecaster">StalkForecaster</h3>
-        <p>The forecasting service definition.</p>
-        <table class="enum-table">
-          <thead>
-            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
-          </thead>
-          <tbody>
-            
-              <tr>
-                <td>ForecastPrices</td>
-                <td><a href="#proto.Ticker">Ticker</a></td>
-                <td><a href="#proto.Forecast">Forecast</a></td>
-                <td><p>Returns a turnip price forecast for supplied price ticker.</p></td>
-              </tr>
-            
-          </tbody>
-        </table>
-
-        
-          
-          
-          <h4>Methods with HTTP bindings</h4>
-          <table>
-            <thead>
-              <tr>
-                <td>Method Name</td>
-                <td>Method</td>
-                <td>Pattern</td>
-                <td>Body</td>
-              </tr>
-            </thead>
-            <tbody>
-            
-              
-              
-              <tr>
-                <td>ForecastPrices</td>
-                <td>POST</td>
-                <td>/forecast</td>
-                <td>*</td>
-              </tr>
-              
-            
-            </tbody>
-          </table>
-          
-        
     
 
     <h2 id="scalar-value-types">Scalar Value Types</h2>

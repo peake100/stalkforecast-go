@@ -8,7 +8,7 @@ config = configparser.ConfigParser()
 config.read(str(config_path))
 
 proto_path = (
-    root_dir / "stalk-proto" / "service.proto"
+    root_dir / "stalk_proto" / "forecaster.proto"
 )
 swagger_path = (
     root_dir / "zdocs" / "source"
@@ -24,7 +24,7 @@ proc = subprocess.Popen(
         "protoc",
         "-I",
         root_dir,
-        f"--swagger_out=logtostderr=true:./zdocs",
+        f"--swagger_out=logtostderr=true:./zdocs/source",
         str(proto_path),
     ],
     cwd=str(root_dir),
@@ -39,7 +39,8 @@ proc = subprocess.Popen(
         "protoc",
         f"--doc_out=./zdocs/source/_static",
         "--doc_opt=html,proto.html",
-        f"./stalk-proto/service.proto",
+        f"./stalk_proto/forecaster.proto",
+        f"./stalk_proto/models.proto",
     ],
     cwd=str(root_dir),
 )
@@ -56,7 +57,7 @@ proc = subprocess.Popen(
         "bundle",
         "-o",
         str(root_dir / "zdocs/source/_static/redoc.html"),
-        str(swagger_path / "stalk-proto" / "service.swagger.json")
+        str(swagger_path / "stalk_proto" / "forecaster.swagger.json")
     ]
 )
 _, _ = proc.communicate(timeout=30)
