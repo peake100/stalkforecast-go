@@ -3,7 +3,7 @@ package servers
 import (
 	"context"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-	"github.com/peake100/stalkforecaster-go/gen/stalk-proto"
+	"github.com/peake100/stalkforecaster-go/protogen/stalk_proto"
 	"golang.org/x/xerrors"
 	"google.golang.org/grpc"
 	"log"
@@ -32,7 +32,7 @@ func RunRest(
 	// Note: Make sure the gRPC server is running properly and accessible
 	mux := runtime.NewServeMux()
 	opts := []grpc.DialOption{grpc.WithInsecure()}
-	err := proto.RegisterStalkForecasterHandlerFromEndpoint(
+	err := stalkproto.RegisterStalkForecasterHandlerFromEndpoint(
 		ctx, mux, grpcServerEndpoint, opts,
 	)
 	if err != nil {
