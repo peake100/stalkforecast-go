@@ -22,7 +22,7 @@ func requestTimeout() (context.Context, context.CancelFunc) {
 
 type TestBasicPredictionSuite struct {
 	suite.Suite
-	monitor    *servers.ServersMonitor
+	monitor    *servers.Monitor
 	client     stalkproto.StalkForecasterClient
 	clientConn *grpc.ClientConn
 

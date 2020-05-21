@@ -50,7 +50,7 @@ func makeService() (service *grpc.Server, listener net.Listener, err error) {
 }
 
 func RunGrpc(
-	monitor *ServersMonitor,
+	monitor *Monitor,
 ) {
 	// Create the service and listeners
 	service, listener, err := makeService()
