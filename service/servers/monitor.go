@@ -126,7 +126,7 @@ func NewServiceMonitor() *Monitor {
 		shutDownMaster: make(chan interface{}, 2),
 		shutdownGrpc:   make(chan interface{}, 1),
 
-		grpcErrs:    make(chan error, 1),
+		grpcErrs: make(chan error, 1),
 
 		grpcErrList: make([]error, 0),
 

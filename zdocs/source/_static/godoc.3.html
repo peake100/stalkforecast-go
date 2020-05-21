@@ -93,13 +93,7 @@
 			</div>
 			<div class="expanded">
 				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
-				<p>
-Package stalkproto is a reverse proxy.
-</p>
-<p>
-It translates gRPC into RESTful JSON APIs.
-</p>
-
+				
 				
 			</div>
 		</div>
@@ -118,18 +112,6 @@ It translates gRPC into RESTful JSON APIs.
 			
 				<dd><a href="godoc.3.html#pkg-variables">Variables</a></dd>
 			
-			
-				
-				<dd><a href="godoc.3.html#RegisterStalkForecasterHandler">func RegisterStalkForecasterHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error</a></dd>
-			
-				
-				<dd><a href="godoc.3.html#RegisterStalkForecasterHandlerClient">func RegisterStalkForecasterHandlerClient(ctx context.Context, mux *runtime.ServeMux, client StalkForecasterClient) error</a></dd>
-			
-				
-				<dd><a href="godoc.3.html#RegisterStalkForecasterHandlerFromEndpoint">func RegisterStalkForecasterHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error)</a></dd>
-			
-				
-				<dd><a href="godoc.3.html#RegisterStalkForecasterHandlerServer">func RegisterStalkForecasterHandlerServer(ctx context.Context, mux *runtime.ServeMux, server StalkForecasterServer) error</a></dd>
 			
 				
 				<dd><a href="godoc.3.html#RegisterStalkForecasterServer">func RegisterStalkForecasterServer(s *grpc.Server, srv StalkForecasterServer)</a></dd>
@@ -564,8 +546,6 @@ It translates gRPC into RESTful JSON APIs.
 			
 				<a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/protogen/stalk_proto/forecaster.pb.go">forecaster.pb.go</a>
 			
-				<a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/protogen/stalk_proto/forecaster.pb.gw.go">forecaster.pb.gw.go</a>
-			
 				<a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/protogen/stalk_proto/models.pb.go">models.pb.go</a>
 			
 			</span>
@@ -623,78 +603,6 @@ Enum value maps for ImageFormat.
 				<pre>var <span id="File_stalk_proto_models_proto">File_stalk_proto_models_proto</span> <a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://localhost:6161/pkg/google.golang.org/protobuf/reflect/protoreflect/#FileDescriptor">FileDescriptor</a></pre>
 			
 		
-		
-			
-			
-			<h2 id="RegisterStalkForecasterHandler">func <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/protogen/stalk_proto/forecaster.pb.gw.go?s=4352:4460#L113">RegisterStalkForecasterHandler</a>
-				<a class="permalink" href="godoc.3.html#RegisterStalkForecasterHandler">&#xb6;</a>
-				
-				
-			</h2>
-			<pre>func RegisterStalkForecasterHandler(ctx <a href="http://localhost:6161/pkg/context/">context</a>.<a href="http://localhost:6161/pkg/context/#Context">Context</a>, mux *<a href="http://localhost:6161/pkg/github.com/grpc-ecosystem/grpc-gateway/runtime/">runtime</a>.<a href="http://localhost:6161/pkg/github.com/grpc-ecosystem/grpc-gateway/runtime/#ServeMux">ServeMux</a>, conn *<a href="http://localhost:6161/pkg/google.golang.org/grpc/">grpc</a>.<a href="http://localhost:6161/pkg/google.golang.org/grpc/#ClientConn">ClientConn</a>) <a href="http://localhost:6161/pkg/builtin/#error">error</a></pre>
-			<p>
-RegisterStalkForecasterHandler registers the http handlers for service StalkForecaster to &#34;mux&#34;.
-The handlers forward requests to the grpc endpoint over &#34;conn&#34;.
-</p>
-
-			
-			
-
-		
-			
-			
-			<h2 id="RegisterStalkForecasterHandlerClient">func <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/protogen/stalk_proto/forecaster.pb.gw.go?s=5057:5178#L122">RegisterStalkForecasterHandlerClient</a>
-				<a class="permalink" href="godoc.3.html#RegisterStalkForecasterHandlerClient">&#xb6;</a>
-				
-				
-			</h2>
-			<pre>func RegisterStalkForecasterHandlerClient(ctx <a href="http://localhost:6161/pkg/context/">context</a>.<a href="http://localhost:6161/pkg/context/#Context">Context</a>, mux *<a href="http://localhost:6161/pkg/github.com/grpc-ecosystem/grpc-gateway/runtime/">runtime</a>.<a href="http://localhost:6161/pkg/github.com/grpc-ecosystem/grpc-gateway/runtime/#ServeMux">ServeMux</a>, client <a href="godoc.3.html#StalkForecasterClient">StalkForecasterClient</a>) <a href="http://localhost:6161/pkg/builtin/#error">error</a></pre>
-			<p>
-RegisterStalkForecasterHandlerClient registers the http handlers for service StalkForecaster
-to &#34;mux&#34;. The handlers forward requests to the grpc endpoint over the given implementation of &#34;StalkForecasterClient&#34;.
-Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in &#34;StalkForecasterClient&#34;
-doesn&#39;t go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-&#34;StalkForecasterClient&#34; to call the correct interceptors.
-</p>
-
-			
-			
-
-		
-			
-			
-			<h2 id="RegisterStalkForecasterHandlerFromEndpoint">func <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/protogen/stalk_proto/forecaster.pb.gw.go?s=3584:3728#L88">RegisterStalkForecasterHandlerFromEndpoint</a>
-				<a class="permalink" href="godoc.3.html#RegisterStalkForecasterHandlerFromEndpoint">&#xb6;</a>
-				
-				
-			</h2>
-			<pre>func RegisterStalkForecasterHandlerFromEndpoint(ctx <a href="http://localhost:6161/pkg/context/">context</a>.<a href="http://localhost:6161/pkg/context/#Context">Context</a>, mux *<a href="http://localhost:6161/pkg/github.com/grpc-ecosystem/grpc-gateway/runtime/">runtime</a>.<a href="http://localhost:6161/pkg/github.com/grpc-ecosystem/grpc-gateway/runtime/#ServeMux">ServeMux</a>, endpoint <a href="http://localhost:6161/pkg/builtin/#string">string</a>, opts []<a href="http://localhost:6161/pkg/google.golang.org/grpc/">grpc</a>.<a href="http://localhost:6161/pkg/google.golang.org/grpc/#DialOption">DialOption</a>) (err <a href="http://localhost:6161/pkg/builtin/#error">error</a>)</pre>
-			<p>
-RegisterStalkForecasterHandlerFromEndpoint is same as RegisterStalkForecasterHandler but
-automatically dials to &#34;endpoint&#34; and closes the connection when &#34;ctx&#34; gets done.
-</p>
-
-			
-			
-
-		
-			
-			
-			<h2 id="RegisterStalkForecasterHandlerServer">func <a href="http://localhost:6161/src/github.com/peake100/stalkforecaster-go/protogen/stalk_proto/forecaster.pb.gw.go?s=2433:2554#L61">RegisterStalkForecasterHandlerServer</a>
-				<a class="permalink" href="godoc.3.html#RegisterStalkForecasterHandlerServer">&#xb6;</a>
-				
-				
-			</h2>
-			<pre>func RegisterStalkForecasterHandlerServer(ctx <a href="http://localhost:6161/pkg/context/">context</a>.<a href="http://localhost:6161/pkg/context/#Context">Context</a>, mux *<a href="http://localhost:6161/pkg/github.com/grpc-ecosystem/grpc-gateway/runtime/">runtime</a>.<a href="http://localhost:6161/pkg/github.com/grpc-ecosystem/grpc-gateway/runtime/#ServeMux">ServeMux</a>, server <a href="godoc.3.html#StalkForecasterServer">StalkForecasterServer</a>) <a href="http://localhost:6161/pkg/builtin/#error">error</a></pre>
-			<p>
-RegisterStalkForecasterHandlerServer registers the http handlers for service StalkForecaster to &#34;mux&#34;.
-UnaryRPC     :call StalkForecasterServer directly.
-StreamingRPC :currently unsupported pending <a href="https://github.com/grpc/grpc-go/issues/906">https://github.com/grpc/grpc-go/issues/906</a>.
-</p>
-
-			
-			
-
 		
 			
 			

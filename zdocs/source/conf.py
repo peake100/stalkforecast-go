@@ -18,21 +18,6 @@ __version__ = config.get("version", "release")
 if not __version__:
     __version__ = config.get("version", "target")
 
-# generate the latest swagger spec
-proc = subprocess.Popen(
-    [
-        "protoc",
-        "-I",
-        root_dir,
-        f"--swagger_out=logtostderr=true:./zdocs/source",
-        str(proto_path),
-    ],
-    cwd=str(root_dir),
-)
-_, _ = proc.communicate(timeout=30)
-if proc.returncode != 0:
-    raise RuntimeError("error generating swagger")
-
 # gerate the protoc html docs
 proc = subprocess.Popen(
     [
@@ -48,21 +33,6 @@ _, _ = proc.communicate(timeout=30)
 if proc.returncode != 0:
     print(root_dir)
     raise RuntimeError("error generating protoc doc html")
-
-# generate redoc REST API page
-proc = subprocess.Popen(
-    [
-        "npx",
-        "redoc-cli",
-        "bundle",
-        "-o",
-        str(root_dir / "zdocs/source/_static/redoc.html"),
-        str(swagger_path / "stalk_proto" / "forecaster.swagger.json")
-    ]
-)
-_, _ = proc.communicate(timeout=30)
-if proc.returncode != 0:
-    raise RuntimeError("error generating redoc html")
 
 # -*- coding: utf-8 -*-
 #
