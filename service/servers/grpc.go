@@ -17,7 +17,9 @@ func (server *StalkForecastServer) ForecastPrices(
 ) (*stalkproto.Forecast, error) {
 	// Deserialize the proto object into the turnup ticker object
 	turnupTicker := turnup.NewPriceTicker(
-		int(ticker.PurchasePrice), models.PricePattern(ticker.PreviousPattern),
+		int(ticker.PurchasePrice),
+		models.PricePattern(ticker.PreviousPattern),
+		models.PricePeriod(ticker.CurrentPeriod),
 	)
 
 	// Load it with our values from the protobuff
