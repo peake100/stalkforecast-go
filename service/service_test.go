@@ -76,6 +76,7 @@ func (suite *TestBasicPredictionSuite) TestForecaster() {
 		PurchasePrice:   100,
 		PreviousPattern: stalkproto.PricePatterns_UNKNOWN,
 		Prices:          make([]int32, 12),
+		CurrentPeriod:   0,
 	}
 
 	ctx, cancel := requestTimeout()
@@ -103,6 +104,10 @@ func (suite *TestBasicPredictionSuite) TestSpikeBreakdownLength() {
 	suite.Len(forecast.Spikes.Any.Breakdown, 12, "Any")
 	suite.Len(forecast.Spikes.Small.Breakdown, 12, "Small")
 	suite.Len(forecast.Spikes.Big.Breakdown, 12, "Big")
+}
+
+func (suite *TestBasicPredictionSuite) TestHeat() {
+	suite.NotEqual(int32(0), suite.forecast.Heat, "heat")
 }
 
 func TestBasicPrediction(t *testing.T) {
