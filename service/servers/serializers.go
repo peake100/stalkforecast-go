@@ -109,6 +109,7 @@ func serializePrediction(prediction *models.Prediction) *stalkproto.Forecast {
 			Big:   serializeForecastSpikes(prediction.Spikes.Big()),
 			Any:   serializeForecastSpikes(prediction.Spikes.Any()),
 		},
+		Heat: int32(prediction.Heat),
 	}
 
 	return forecast
